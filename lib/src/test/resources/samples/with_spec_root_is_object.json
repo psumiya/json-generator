@@ -1,0 +1,29 @@
+{
+  "___GENERATOR_SPEC": {
+    "id": {
+      "formula": "RANDOM_UUID"
+    },
+    "someStaticField": {
+      "formula": "IDENTITY"
+    },
+    "state": {
+      "formula": "ONE_OF",
+      "parameters": {
+        "values": ["OR", "WA", "CA"]
+      }
+    }
+  },
+  "id": 0,
+  "username": "string",
+  "someStaticField": "static",
+  "strings": [
+    "traveling",
+    "technology"
+  ],
+  "numbers": [1, 3],
+  "nestedObject": {
+    "param1": "Mahanaxar",
+    "param2": "Valinor"
+  },
+  "state": "OR"
+}

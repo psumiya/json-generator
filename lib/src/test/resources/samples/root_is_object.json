@@ -1,0 +1,13 @@
+{
+  "id": 0,
+  "username": "string",
+  "strings": [
+    "traveling",
+    "technology"
+  ],
+  "numbers": [1, 3],
+  "nestedObject": {
+    "param1": "Mahanaxar",
+    "param2": "Valinor"
+  }
+}
