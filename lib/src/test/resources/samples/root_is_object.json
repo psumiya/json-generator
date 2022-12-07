@@ -1,5 +1,5 @@
 {
-  "id": 0,
+  "id": "0",
   "username": "string",
   "strings": [
     "traveling",
@@ -9,5 +9,8 @@
   "nestedObject": {
     "param1": "Mahanaxar",
     "param2": "Valinor"
-  }
+  },
+  "firstName": "blah",
+  "lastName": "blahh",
+  "gender": "Unknown"
 }

@@ -1,19 +1,25 @@
 {
   "___GENERATOR_SPEC": {
-    "id": {
-      "formula": "RANDOM_UUID"
+    "___LOCALIZATION": {
+      "language": "ma",
+      "country": "CN"
     },
-    "someStaticField": {
-      "formula": "IDENTITY"
-    },
-    "state": {
-      "formula": "ONE_OF",
-      "parameters": {
-        "values": ["OR", "WA", "CA"]
+    "___FIELDS": {
+      "id": {
+        "type": "RANDOM_UUID"
+      },
+      "someStaticField": {
+        "type": "IDENTITY"
+      },
+      "someOneOf": {
+        "type": "ONE_OF",
+        "parameters": {
+          "values": ["B1", "B2", "AX"]
+        }
       }
     }
   },
-  "id": 0,
+  "id": "b66aef25-de3b-4761-8db2-b66793043aac",
   "username": "string",
   "someStaticField": "static",
   "strings": [
@@ -25,5 +31,8 @@
     "param1": "Mahanaxar",
     "param2": "Valinor"
   },
-  "state": "OR"
+  "firstName": "blah",
+  "lastName": "blahh",
+  "gender": "Unknown",
+  "someOneOf": "B2"
 }

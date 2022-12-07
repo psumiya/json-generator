@@ -2,71 +2,95 @@ package json.generator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.JsonNodeType;
-import org.apache.commons.lang3.RandomStringUtils;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.type.MapType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import json.generator.randomizer.Generator;
+import json.generator.model.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public record JsonToJsonGenerator(JsonGeneratorModel jsonGeneratorModel) implements JsonGenerator<String, String> {
 
-    private static final JsonNodeFactory JSON_NODE_FACTORY = JsonNodeFactory.instance;
+    private static final String GENERATOR_SPEC_NODE_NAME = "___GENERATOR_SPEC";
+    private static final String LOCALIZATION_SPEC_NODE_NAME = "___LOCALIZATION";
+    private static final String FIELDS_SPEC_NODE_NAME = "___FIELDS";
 
     @Override
     public String generate(String input) {
+        RandomizerInput randomizerInput = getRandomizerInput(input);
+        JsonGenerator<RandomizerInput, JsonNode> randomizer = getRandomizer();
+        JsonNode randomized = randomizer.generate(randomizerInput);
         try {
-            ObjectMapper objectMapper = jsonGeneratorModel.objectMapper();
-            JsonNode randomized = randomize(objectMapper.readTree(input));
-            return objectMapper.writeValueAsString(randomized);
+            return jsonGeneratorModel.objectMapper().writeValueAsString(randomized);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private JsonNode randomize(JsonNode jsonNode) {
-        JsonNodeType nodeType = jsonNode.getNodeType();
-        Random random = new Random();
-        switch (nodeType) {
-            case NUMBER -> {
-                return JSON_NODE_FACTORY.numberNode(random.nextInt(Integer.MAX_VALUE));
+    private JsonGenerator<RandomizerInput, JsonNode> getRandomizer() {
+        return new Generator(jsonGeneratorModel);
+    }
+
+    private RandomizerInput getRandomizerInput(String input) {
+        try {
+            JsonNode jsonNode = jsonGeneratorModel.objectMapper().readTree(input);
+            GeneratorSpec generatorSpec = getGeneratorSpec(jsonNode);
+            if (jsonNode instanceof ObjectNode) {
+                ((ObjectNode) jsonNode).remove(GENERATOR_SPEC_NODE_NAME);
             }
-            case STRING -> {
-                return JSON_NODE_FACTORY.textNode(RandomStringUtils.randomAlphabetic(random.nextInt(10)));
-            }
-            case BOOLEAN -> {
-                return JSON_NODE_FACTORY.booleanNode(random.nextBoolean());
-            }
-            case OBJECT -> jsonNode.fields().forEachRemaining(field -> {
-                if (field.getValue().isValueNode()) {
-                    JsonNodeType fieldNodeType = field.getValue().getNodeType();
-                    switch (fieldNodeType) {
-                        case NUMBER -> field.setValue(JSON_NODE_FACTORY.numberNode(random.nextInt(Integer.MAX_VALUE)));
-                        case STRING -> field.setValue(JSON_NODE_FACTORY.textNode(RandomStringUtils.randomAlphabetic(random.nextInt(10))));
-                        case BOOLEAN -> field.setValue(JSON_NODE_FACTORY.booleanNode(random.nextBoolean()));
-                    }
-                } else {
-                    field.setValue(randomize(field.getValue()));
-                }
-            });
-            case ARRAY -> {
-                int size = jsonNode.size();
-                if (size == 0) {
-                    throw new IllegalArgumentException("Empty array provided as input. Cannot use empty array to deduce array items.");
-                }
-                JsonNode sample = jsonNode.get(0);
-                int newSize = random.nextInt(jsonGeneratorModel.maxRandomArraySize());
-                List<JsonNode> nodeList = new ArrayList<>(newSize);
-                for (int i = 0; i < newSize; i++) {
-                    nodeList.add(randomize(sample.deepCopy()));
-                }
-                ((ArrayNode) jsonNode).addAll(nodeList);
-            }
+            return new RandomizerInput(generatorSpec, jsonNode);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Error while reading RandomizerInput", e);
         }
-        return jsonNode;
+    }
+
+    private GeneratorSpec getGeneratorSpec(JsonNode jsonNode) {
+        return getSpec(jsonNode, GENERATOR_SPEC_NODE_NAME, GeneratorSpec::new, (generatorSpecNode -> {
+                    Localization l18NSpec = getLocalizationSpec(generatorSpecNode);
+                    Fields fieldSpec = getFieldSpec(generatorSpecNode);
+                    return new GeneratorSpec(l18NSpec, fieldSpec);
+                })
+        );
+    }
+
+    private Fields getFieldSpec(JsonNode generatorSpecNode) {
+        return getSpec(generatorSpecNode, FIELDS_SPEC_NODE_NAME, Fields::new, (jsonNode -> {
+            TypeFactory typeFactory = jsonGeneratorModel.objectMapper().getTypeFactory();
+            MapType mapType = typeFactory.constructMapType(HashMap.class, String.class, BaseSpec.class);
+            try {
+                Fields fieldSpec = new Fields(jsonGeneratorModel.objectMapper().readValue(jsonNode.toString(), mapType));
+                Fields defaultFieldSpec = new Fields();
+                Map<String, BaseSpec> fieldSpecMap = new HashMap<>(defaultFieldSpec.fieldSpecMap());
+                fieldSpecMap.putAll(fieldSpec.fieldSpecMap());
+                return new Fields(fieldSpecMap);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("Error while reading FieldSpec", e);
+            }
+        }));
+
+    }
+
+    private Localization getLocalizationSpec(JsonNode generatorSpecNode) {
+        return getSpec(generatorSpecNode, LOCALIZATION_SPEC_NODE_NAME, Localization::new, (jsonNode -> {
+            try {
+                return jsonGeneratorModel.objectMapper().readValue(jsonNode.toString(), Localization.class);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("Error while reading LocalizationSpec", e);
+            }
+        }));
+    }
+
+    private static <R> R getSpec(JsonNode jsonNode, String fieldName, Supplier<R> defaultSupplier, Function<JsonNode, R> customSupplier) {
+        JsonNode targetJsonNode = jsonNode.path(fieldName);
+        if (targetJsonNode.isMissingNode()) {
+            return defaultSupplier.get();
+        } else {
+            return customSupplier.apply(targetJsonNode);
+        }
     }
 
 }
