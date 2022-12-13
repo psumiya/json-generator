@@ -18,7 +18,8 @@ public enum RandomizerType {
     LAST_NAME("lastName"),
     GENDER("gender"),
     ADDRESS("address"),
-    STREET_ADDRESS("streetAddress");
+    STREET_ADDRESS("streetAddress"),
+    CITY("city");
 
     public static final Map<RandomizerType, BaseSpecRandomizer<JsonNode>> BASE_SPEC_PROVIDER_MAP = new HashMap<>();
 
