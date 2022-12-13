@@ -16,7 +16,8 @@ public enum RandomizerType {
     ONE_OF,
     FIRST_NAME,
     LAST_NAME,
-    GENDER;
+    GENDER,
+    ADDRESS;
 
     public static Map<RandomizerType, BaseSpecRandomizer<JsonNode>> BASE_SPEC_PROVIDER_MAP;
 

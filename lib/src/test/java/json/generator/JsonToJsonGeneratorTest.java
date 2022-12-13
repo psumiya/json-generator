@@ -50,6 +50,7 @@ public class JsonToJsonGeneratorTest {
             try {
                 JsonNode randomized = jsonGeneratorModel.objectMapper().readTree(generated);
                 assertEquals(0, jsonKeyComparator.compare(original, randomized));
+                System.out.println(randomized);
             } catch (JsonProcessingException e) {
                 fail("JsonProcessingException occurred." + e);
             }

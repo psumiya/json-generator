@@ -11,13 +11,13 @@ public record FakerRandomizer(Faker faker) implements BaseSpecRandomizer<JsonNod
 
     @Override
     public JsonNode generate(BaseSpec baseSpec, JsonNode sampleValue) {
-        JsonNode jsonNode = switch (baseSpec.type()) {
+        return switch (baseSpec.type()) {
             case FIRST_NAME -> JSON_NODE_FACTORY.textNode(faker.name().firstName());
             case LAST_NAME -> JSON_NODE_FACTORY.textNode(faker.name().lastName());
             case GENDER -> JSON_NODE_FACTORY.textNode(faker.gender().types());
+            case ADDRESS -> JSON_NODE_FACTORY.textNode(faker.address().fullAddress());
             default -> JSON_NODE_FACTORY.missingNode();
         };
-        return jsonNode;
     }
 
 }

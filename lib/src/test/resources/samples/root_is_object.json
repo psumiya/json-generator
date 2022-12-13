@@ -12,5 +12,6 @@
   },
   "firstName": "blah",
   "lastName": "blahh",
-  "gender": "Unknown"
+  "gender": "Unknown",
+  "address": "123 St"
 }
