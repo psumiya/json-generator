@@ -16,6 +16,7 @@ public record FakerRandomizer(Faker faker) implements BaseSpecRandomizer<JsonNod
             case LAST_NAME -> JSON_NODE_FACTORY.textNode(faker.name().lastName());
             case GENDER -> JSON_NODE_FACTORY.textNode(faker.gender().types());
             case ADDRESS -> JSON_NODE_FACTORY.textNode(faker.address().fullAddress());
+            case STREET_ADDRESS -> JSON_NODE_FACTORY.textNode(faker.address().streetAddress());
             default -> JSON_NODE_FACTORY.missingNode();
         };
     }
