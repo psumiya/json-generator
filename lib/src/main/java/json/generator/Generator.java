@@ -1,14 +1,14 @@
-package json.generator.randomizer;
+package json.generator;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
-import json.generator.JsonGenerator;
-import json.generator.model.JsonGeneratorModel;
 import json.generator.model.BaseSpec;
+import json.generator.model.JsonGeneratorModel;
 import json.generator.model.Localization;
 import json.generator.model.RandomizerInput;
+import json.generator.randomizer.RandomizerType;
 import net.datafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -27,7 +27,10 @@ public record Generator(JsonGeneratorModel jsonGeneratorModel) implements JsonGe
         JsonNodeType nodeType = jsonNode.getNodeType();
         Random random = new Random();
         Localization localizationSpec = input.generatorSpec().localizationSpec();
-        Locale locale = new Locale(localizationSpec.language(), localizationSpec.country());
+        Locale locale = new Locale.Builder()
+                .setLanguage(localizationSpec.language())
+                .setRegion(localizationSpec.country())
+                .build();
         Map<String, BaseSpec> fieldSpecMap = input.generatorSpec().fieldSpec().fieldSpecMap();
         Faker faker = new Faker(locale);
         RandomizerType.buildProviders(faker);

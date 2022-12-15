@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public record OneOfRandomizer() implements BaseSpecRandomizer<JsonNode> {
+public record OneOfRandomizer() implements Randomizer<JsonNode> {
 
     private static final JsonNodeFactory JSON_NODE_FACTORY = JsonNodeFactory.instance;
     private static final String VALUES = "values";
@@ -17,8 +17,7 @@ public record OneOfRandomizer() implements BaseSpecRandomizer<JsonNode> {
     public JsonNode generate(BaseSpec baseSpec, JsonNode sampleValue) {
         Map<String, Object> parameters = baseSpec.parameters();
         Object values = parameters.get(VALUES);
-        if (values instanceof List<?>) {
-            List<?> possibleItems = (List<?>) values;
+        if (values instanceof List<?> possibleItems) {
             int size = possibleItems.size();
             int nextInt = new Random().nextInt(size);
             Object o = possibleItems.get(nextInt);

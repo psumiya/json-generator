@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import json.generator.model.BaseSpec;
 import net.datafaker.Faker;
 
-public record FakerRandomizer(Faker faker) implements BaseSpecRandomizer<JsonNode> {
+public record FakerRandomizer(Faker faker) implements Randomizer<JsonNode> {
 
     private static final JsonNodeFactory JSON_NODE_FACTORY = JsonNodeFactory.instance;
 

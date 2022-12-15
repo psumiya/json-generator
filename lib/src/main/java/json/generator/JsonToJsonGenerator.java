@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import json.generator.randomizer.Generator;
 import json.generator.model.*;
 
 import java.util.HashMap;
@@ -22,7 +21,7 @@ public record JsonToJsonGenerator(JsonGeneratorModel jsonGeneratorModel) impleme
     @Override
     public String generate(String input) {
         RandomizerInput randomizerInput = getRandomizerInput(input);
-        JsonGenerator<RandomizerInput, JsonNode> randomizer = getRandomizer();
+        JsonGenerator<RandomizerInput, JsonNode> randomizer = getGenerator();
         JsonNode randomized = randomizer.generate(randomizerInput);
         try {
             return jsonGeneratorModel.objectMapper().writeValueAsString(randomized);
@@ -31,7 +30,7 @@ public record JsonToJsonGenerator(JsonGeneratorModel jsonGeneratorModel) impleme
         }
     }
 
-    private JsonGenerator<RandomizerInput, JsonNode> getRandomizer() {
+    private JsonGenerator<RandomizerInput, JsonNode> getGenerator() {
         return new Generator(jsonGeneratorModel);
     }
 

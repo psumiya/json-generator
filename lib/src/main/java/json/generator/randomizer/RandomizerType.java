@@ -21,7 +21,7 @@ public enum RandomizerType {
     STREET_ADDRESS("streetAddress"),
     CITY("city");
 
-    public static final Map<RandomizerType, BaseSpecRandomizer<JsonNode>> BASE_SPEC_PROVIDER_MAP = new HashMap<>();
+    public static final Map<RandomizerType, Randomizer<JsonNode>> BASE_SPEC_PROVIDER_MAP = new HashMap<>();
 
     public static final Map<String, BaseSpec> DEFAULT_FIELD_SPEC_MAP = new HashMap<>();
 
@@ -38,7 +38,7 @@ public enum RandomizerType {
     }
 
     public static void buildProviders(Faker faker) {
-        BaseSpecRandomizer<JsonNode> randomUUIDProvider = (baseSpec, jsonNode) -> JsonNodeFactory.instance.textNode(UUID.randomUUID().toString());
+        Randomizer<JsonNode> randomUUIDProvider = (baseSpec, jsonNode) -> JsonNodeFactory.instance.textNode(UUID.randomUUID().toString());
         OneOfRandomizer oneOfProvider = new OneOfRandomizer();
         FakerRandomizer fakerProvider = new FakerRandomizer(faker);
         for (RandomizerType randomizerType : RandomizerType.values()) {
