@@ -5,21 +5,25 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import json.generator.model.BaseSpec;
 import net.datafaker.Faker;
 
+import java.util.function.Function;
+
 public record FakerRandomizer(Faker faker) implements Randomizer<JsonNode> {
 
     private static final JsonNodeFactory JSON_NODE_FACTORY = JsonNodeFactory.instance;
 
     @Override
     public JsonNode generate(BaseSpec baseSpec, JsonNode sampleValue) {
-        return switch (baseSpec.type()) {
-            case FIRST_NAME -> JSON_NODE_FACTORY.textNode(faker.name().firstName());
-            case LAST_NAME -> JSON_NODE_FACTORY.textNode(faker.name().lastName());
-            case GENDER -> JSON_NODE_FACTORY.textNode(faker.gender().types());
-            case ADDRESS -> JSON_NODE_FACTORY.textNode(faker.address().fullAddress());
-            case STREET_ADDRESS -> JSON_NODE_FACTORY.textNode(faker.address().streetAddress());
-            case CITY -> JSON_NODE_FACTORY.textNode(faker.address().city());
-            default -> JSON_NODE_FACTORY.missingNode();
-        };
+        String fakeValue = getFakeValue(baseSpec);
+        if (fakeValue.isEmpty()) {
+            return JSON_NODE_FACTORY.missingNode();
+        } else {
+            return JSON_NODE_FACTORY.textNode(fakeValue);
+        }
+    }
+
+    private String getFakeValue(BaseSpec baseSpec) {
+        Function<Faker, String> function = RandomizerType.FAKER_FUNCTION_MAP.get(baseSpec.type());
+        return function == null ? "" : function.apply(faker);
     }
 
 }

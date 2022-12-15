@@ -8,32 +8,44 @@ import net.datafaker.Faker;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Function;
 
 public enum RandomizerType {
 
     IDENTITY("identity"),
     RANDOM_UUID("id"),
     ONE_OF("oneOf"),
-    FIRST_NAME("firstName"),
-    LAST_NAME("lastName"),
-    GENDER("gender"),
-    ADDRESS("address"),
-    STREET_ADDRESS("streetAddress"),
-    CITY("city");
+    FIRST_NAME("firstName", faker -> faker.name().firstName()),
+    LAST_NAME("lastName", faker -> faker.name().lastName()),
+    GENDER("gender", faker -> faker.gender().types()),
+    ADDRESS("address", faker -> faker.address().fullAddress()),
+    STREET_ADDRESS("streetAddress", faker -> faker.address().streetAddress()),
+    CITY("city", faker -> faker.address().city());
 
     public static final Map<RandomizerType, Randomizer<JsonNode>> BASE_SPEC_PROVIDER_MAP = new HashMap<>();
 
     public static final Map<String, BaseSpec> DEFAULT_FIELD_SPEC_MAP = new HashMap<>();
 
+    public static final Map<RandomizerType, Function<Faker, String>> FAKER_FUNCTION_MAP = new HashMap<>();
+
     private final String randomizerKey;
+
+    private final Function<Faker, String> supplier;
 
     RandomizerType(String randomizerKey) {
         this.randomizerKey = randomizerKey;
+        this.supplier = faker -> "";
+    }
+
+    RandomizerType(String randomizerKey, Function<Faker, String> supplier) {
+        this.randomizerKey = randomizerKey;
+        this.supplier = supplier;
     }
 
     static {
         for (RandomizerType randomizerType : RandomizerType.values()) {
             DEFAULT_FIELD_SPEC_MAP.put(randomizerType.randomizerKey, new BaseSpec(randomizerType));
+            FAKER_FUNCTION_MAP.put(randomizerType, randomizerType.supplier);
         }
     }
 
