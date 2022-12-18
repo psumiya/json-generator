@@ -49,7 +49,7 @@ public enum RandomizerType {
         }
     }
 
-    public static void buildProviders(Faker faker) {
+    public static void initializeProviders(Faker faker) {
         Randomizer<JsonNode> randomUUIDProvider = (baseSpec, jsonNode) -> JsonNodeFactory.instance.textNode(UUID.randomUUID().toString());
         OneOfRandomizer oneOfProvider = new OneOfRandomizer();
         FakerRandomizer fakerProvider = new FakerRandomizer(faker);

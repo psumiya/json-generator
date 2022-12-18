@@ -33,7 +33,7 @@ public record Generator(JsonGeneratorModel jsonGeneratorModel) implements JsonGe
                 .build();
         Map<String, BaseSpec> fieldSpecMap = input.generatorSpec().fieldSpec().fieldSpecMap();
         Faker faker = new Faker(locale);
-        RandomizerType.buildProviders(faker);
+        RandomizerType.initializeProviders(faker);
         switch (nodeType) {
             case NUMBER -> {
                 return JSON_NODE_FACTORY.numberNode(random.nextInt(Integer.MAX_VALUE));
