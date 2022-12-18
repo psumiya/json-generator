@@ -13,13 +13,21 @@ import java.util.function.Function;
 public enum RandomizerType {
 
     IDENTITY("identity"),
+
     RANDOM_UUID("id"),
+
     ONE_OF("oneOf"),
+
+    FULL_NAME("fullName", faker -> faker.name().fullName()),
     FIRST_NAME("firstName", faker -> faker.name().firstName()),
     LAST_NAME("lastName", faker -> faker.name().lastName()),
+
     GENDER("gender", faker -> faker.gender().types()),
+
     ADDRESS("address", faker -> faker.address().fullAddress()),
     STREET_ADDRESS("streetAddress", faker -> faker.address().streetAddress()),
+    STATE("state", faker -> faker.address().state()),
+    TIME_ZONE("timeZone", faker -> faker.address().timeZone()),
     CITY("city", faker -> faker.address().city());
 
     public static final Map<RandomizerType, Randomizer<JsonNode>> BASE_SPEC_PROVIDER_MAP = new HashMap<>();
