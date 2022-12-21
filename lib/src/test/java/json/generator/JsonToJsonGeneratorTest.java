@@ -25,6 +25,7 @@ public class JsonToJsonGeneratorTest {
 
     static Stream<Arguments> sampleFilesProvider() {
         return Stream.of(
+                arguments(DEFAULT_ROOT + "firstLastName.json", new JsonGeneratorModel()),
                 arguments(DEFAULT_ROOT + "root_is_object.json", new JsonGeneratorModel()),
                 arguments(DEFAULT_ROOT + "root_is_array.json", new JsonGeneratorModel()),
                 arguments(DEFAULT_ROOT + "root_is_array.json", new JsonGeneratorModel(20)),

@@ -1,0 +1,227 @@
+= Json Generator
+:toc:
+
+== About Json Generator
+This is an experimental project to generate random Json strings based on a given input Json string.
+
+`String generate(String input)`
+
+The method generates a random Json based on the input provided. For example, here are some randomly generated Json strings based on the shown inputs.
+
+The library takes an opinionated view of what things to randomize and how to go about it.
+
+[cols="1,1"]
+|===
+|Input |Output
+
+a|
+----
+{
+ "firstName": "alpha",
+ "lastName": "beta"
+}
+----
+
+a|
+----
+{
+    "firstName": "Scot",
+    "lastName": "Deckow"
+}
+----
+
+a|
+----
+{
+  "id": "0",
+  "username": "string",
+  "strings": [
+    "traveling",
+    "technology"
+  ],
+  "numbers": [1, 3],
+  "nestedObject": {
+    "param1": "Mahanaxar",
+    "param2": "Valinor"
+  },
+  "firstName": "blah",
+  "lastName": "blahh",
+  "gender": "Unknown",
+  "address": "123 St"
+}
+----
+
+a|
+----
+{
+    "id": "4b47326d-62f6-4d6b-ace6-c7dfd9238524",
+    "username": "eKjbOZXp",
+    "strings": [
+        "traveling",
+        "technology",
+        "Cyogxmi",
+        "",
+        "QFuFYwT",
+        "Y",
+        "opnL",
+        "vLqco"
+    ],
+    "numbers": [
+        1,
+        3,
+        2040164119,
+        1249468561,
+        1374240163,
+        777293347
+    ],
+    "nestedObject": {
+        "param1": "mqmTqry",
+        "param2": "a"
+    },
+    "firstName": "Ashlie",
+    "lastName": "Gulgowski",
+    "gender": "Male",
+    "address": "89608 Petrina Village, Port Florentinoberg, IA 68487"
+}
+----
+|===
+
+=== Customization
+You may choose to provide a generator specification that informs the library regarding certain aspects of how to generate the Json. See the \___GENERATOR_SPEC node in the below example. The spec helps with overriding the default locale values (as defined in ___LOCALIZATION), and a way to plug in some excel-style formulas for generating specific nodes (as defined in ___FIELDS).
+
+
+[cols="1,1"]
+|===
+|Input |Output
+
+a|
+----
+{
+  "___GENERATOR_SPEC": {
+    "___LOCALIZATION": {
+      "language": "es",
+      "country": "MX"
+    },
+    "___FIELDS": {
+      "id": {
+        "type": "RANDOM_UUID"
+      },
+      "someStaticField": {
+        "type": "IDENTITY"
+      },
+      "someOneOf": {
+        "type": "ONE_OF",
+        "parameters": {
+          "values": ["B1", "B2", "AX"]
+        }
+      }
+    }
+  },
+  "id": "b66aef25-de3b-4761-8db2-b66793043aac",
+  "username": "string",
+  "someStaticField": "static",
+  "strings": [
+    "traveling",
+    "technology"
+  ],
+  "numbers": [1, 3],
+  "nestedObject": {
+    "param1": "Mahanaxar",
+    "param2": "Valinor"
+  },
+  "firstName": "blah",
+  "lastName": "blahh",
+  "gender": "Unknown",
+  "someOneOf": "B2"
+}
+----
+
+a|
+----
+{
+    "id": "c03b36bc-da35-48f1-84fd-76b1cae07ab6",
+    "username": "",
+    "someStaticField": "static",
+    "strings": [
+        "traveling",
+        "technology",
+        ""
+    ],
+    "numbers": [
+        1,
+        3,
+        1559211121,
+        1166812153,
+        1272454773,
+        594097234
+    ],
+    "nestedObject": {
+        "param1": "xsIXMoFt",
+        "param2": "CmRR"
+    },
+    "firstName": "Ignacio",
+    "lastName": "Rubio",
+    "gender": "Female",
+    "someOneOf": "AX"
+}
+----
+
+|===
+
+
+See the `JsonToJsonGeneratorTest` class for canonical ways to invoke the random Json generator.
+
+This project depends on the `net.datafaker:datafaker` library. That library generates fake json, similar to the javascript `faker.js` library or the python `faker` package.
+
+The default language supported for this library is `en`, and the default region is `US`.
+
+This library can be used in situations where you may want to randomize the data being used across test runs. For example, given a sample, this library can keep generating different data across each run, which can help with better performance test of your system.
+
+NOTE: While the library tries to generate random data, it is possible it can randomly generate some data that is not fake. Exercise caution around its usage.
+
+== Performance
+
+To evaluate performance, a performance benchmark is provided in the `src/jmh` directory.
+
+To execute the benchmark, run `./gradlew jmh` at the root of this project.
+
+Here is the result of a jmh benchmark execution:
+
+[source:shell]
+----
+# JMH version: 1.35
+# VM version: JDK 19, OpenJDK 64-Bit Server VM, 19+36-2238
+# VM invoker: /Users/~/.sdkman/candidates/java/19-open/bin/java
+# VM options: -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/Users/~/dev/json-generator/lib/build/tmp/jmh -Duser.country=US -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+.
+.
+.
+Result "json.generator.PerformanceTest.executeMethodToBenchmark":
+  18.021 ±(99.9%) 0.495 ms/op [Average]
+  (min, avg, max) = (17.397, 18.021, 18.860), stdev = 0.463
+  CI (99.9%): [17.526, 18.517] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:08:53
+.
+.
+.
+
+Benchmark                                 Mode  Cnt   Score   Error  Units
+PerformanceTest.executeMethodToBenchmark  avgt   15  18.021 ± 0.495  ms/op
+----
+
+The interpretation is that across 15 executions, the operation completed in an average time of 18.021 milliseconds, within a margin of error of ± 0.495 millis.
+
+The test was executed on a Mac with the following configuration:
+
+* Processor: 2.3 GHz Dual-Core Intel Core i5
+* Memory: 8 GB 2133 MHz LPDDR3
+
+Note that the above is just data and not a repeatable insight.
