@@ -1,0 +1,17 @@
+{
+  "id": "0",
+  "username": "string",
+  "strings": [
+    "traveling",
+    "technology"
+  ],
+  "numbers": [1, 3],
+  "nestedObject": {
+    "param1": "Mahanaxar",
+    "param2": "Valinor"
+  },
+  "firstName": "blah",
+  "lastName": "blahh",
+  "gender": "Unknown",
+  "address": "123 St"
+}
