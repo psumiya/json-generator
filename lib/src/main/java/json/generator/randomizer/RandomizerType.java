@@ -28,7 +28,23 @@ public enum RandomizerType {
     STREET_ADDRESS("streetAddress", faker -> faker.address().streetAddress()),
     STATE("state", faker -> faker.address().state()),
     TIME_ZONE("timeZone", faker -> faker.address().timeZone()),
-    CITY("city", faker -> faker.address().city());
+    CITY("city", faker -> faker.address().city()),
+
+    CREDIT_CARD_TYPE("creditCardType", faker -> faker.business().creditCardType()),
+    CREDIT_CARD_NUMBER("creditCardNumber", faker -> faker.business().creditCardNumber()),
+    CREDIT_CARD_EXPIRY("creditCardExpiry", faker -> faker.business().creditCardExpiry()),
+
+    BOOK_TITLE("title", faker -> faker.book().title()),
+    BOOK_AUTHOR("author", faker -> faker.book().author()),
+    BOOK_GENRE("genre", faker -> faker.book().genre()),
+    BOOK_PUBLISHER("publisher", faker -> faker.book().publisher()),
+
+    COFFEE_BLEND("blend", faker -> faker.coffee().blendName()),
+
+    COLOR("color", faker -> faker.color().name()),
+    COLOR_HEX("hexColor", faker -> faker.color().hex()),
+
+    BLOOD_GROUP("bloodGroup", faker -> faker.bloodtype().bloodGroup());
 
     public static final Map<RandomizerType, Randomizer<JsonNode>> BASE_SPEC_PROVIDER_MAP = new HashMap<>();
 
