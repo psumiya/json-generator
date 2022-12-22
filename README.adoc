@@ -87,8 +87,11 @@ a|
 |===
 
 === Customization
-You may choose to provide a generator specification that informs the library regarding certain aspects of how to generate the Json. See the \___GENERATOR_SPEC node in the below example. The spec helps with overriding the default locale values (as defined in ___LOCALIZATION), and a way to plug in some excel-style formulas for generating specific nodes (as defined in ___FIELDS).
+You may choose to provide a generator specification that informs the library regarding certain aspects of how to generate the Json.
 
+This is done by providing a generator specification, in addition to the original sample to randomize, as the full input to the library.
+
+For an example, see the \___GENERATOR_SPEC node in the input below. The spec helps with overriding the default locale values, as defined in ___LOCALIZATION, and a way to plug in some excel-style formulas for generating specific nodes, as defined in ___FIELDS.
 
 [cols="1,1"]
 |===
