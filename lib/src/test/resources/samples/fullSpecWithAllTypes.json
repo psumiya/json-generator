@@ -1,0 +1,52 @@
+{
+  "___GENERATOR_SPEC": {
+    "___LOCALIZATION": {
+      "language": "fr",
+      "country": "FR"
+    },
+    "___FIELDS": {
+      "someStaticField": {
+        "type": "IDENTITY"
+      },
+      "id": {
+        "type": "RANDOM_UUID"
+      },
+      "someOneOf": {
+        "type": "ONE_OF",
+        "parameters": {
+          "values": ["B1", "B2", "AX"]
+        }
+      }
+    }
+  },
+  "someStaticField": "static",
+  "id": "b66aef25-de3b-4761-8db2-b66793043aac",
+  "someOneOf": "B2",
+
+  "fullName": "ab",
+  "firstName": "a",
+  "lastName": "b",
+  "gender": "Unknown",
+
+  "address": "123 Bond St, Paris, FR",
+  "streetAddress": "123 Bond St",
+  "state": "AS",
+  "timeZone": "GMT",
+  "city": "Paris",
+
+  "creditCardType": "Visa",
+  "creditCardNumber": "1234567890123456",
+  "creditCardExpiry": "12/31/2022",
+
+  "title": "t",
+  "author": "",
+  "genre": "Finance",
+  "publisher": "RandomHouse",
+
+  "blend": "blend",
+
+  "color": "color",
+  "hexColor": "#12",
+
+  "bloodGroup": "A"
+}

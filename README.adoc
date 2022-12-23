@@ -182,6 +182,8 @@ This library can be used in situations where you may want to randomize the data 
 
 NOTE: While the library tries to generate random data, it is possible it can randomly generate some data that is not fake. Exercise caution around its usage.
 
+Run FullSpecTest to see randomized output for an input with all supported fields and spec.
+
 == Performance
 
 To evaluate performance, a performance benchmark is provided in the `src/jmh` directory.
