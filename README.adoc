@@ -171,6 +171,7 @@ a|
 
 |===
 
+Run FullSpecTest to see randomized output for an input with all supported fields and spec.
 
 See the `JsonToJsonGeneratorTest` class for canonical ways to invoke the random Json generator.
 
@@ -181,8 +182,6 @@ The default language supported for this library is `en`, and the default region 
 This library can be used in situations where you may want to randomize the data being used across test runs. For example, given a sample, this library can keep generating different data across each run, which can help with better performance test of your system.
 
 NOTE: While the library tries to generate random data, it is possible it can randomly generate some data that is not fake. Exercise caution around its usage.
-
-Run FullSpecTest to see randomized output for an input with all supported fields and spec.
 
 == Performance
 
