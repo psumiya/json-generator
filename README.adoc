@@ -173,6 +173,251 @@ a|
 
 Run FullSpecTest to see randomized output for an input with all supported fields and spec.
 
+Here is a table showing some additional customized inputs and corresponding results.
+
+[cols="1,1"]
+|===
+|Input |Output
+
+a|
+----
+{
+  "___GENERATOR_SPEC": {
+    "___LOCALIZATION": {
+      "language": "fr",
+      "country": "FR"
+    },
+    "___FIELDS": {
+      "someStaticField": {
+        "type": "IDENTITY"
+      },
+      "id": {
+        "type": "RANDOM_UUID"
+      },
+      "someOneOf": {
+        "type": "ONE_OF",
+        "parameters": {
+          "values": ["B1", "B2", "AX"]
+        }
+      }
+    }
+  },
+  "someStaticField": "static",
+  "id": "b66aef25-de3b-4761-8db2-b66793043aac",
+  "someOneOf": "B2",
+  "fullName": "ab",
+  "firstName": "a",
+  "lastName": "b",
+  "gender": "Unknown",
+  "address": "123 Bond St, Paris, FR",
+  "streetAddress": "123 Bond St",
+  "state": "AS",
+  "timeZone": "GMT",
+  "city": "Paris",
+  "creditCardType": "Visa",
+  "creditCardNumber": "1234567890123456",
+  "creditCardExpiry": "12/31/2022",
+  "title": "t",
+  "author": "",
+  "genre": "Finance",
+  "publisher": "RandomHouse",
+  "blend": "blend",
+  "color": "color",
+  "hexColor": "#12",
+  "bloodGroup": "A"
+}
+----
+
+a|
+----
+{
+  "someStaticField" : "static",
+  "id" : "c92fd902-ad58-4a41-8b78-785be4620e4a",
+  "someOneOf" : "B1",
+  "fullName" : "Prof Laura Dufour",
+  "firstName" : "Lucie",
+  "lastName" : "Girard",
+  "gender" : "Polygender",
+  "address" : "5 étage, 6 Allée, Voie du Faubourg Saint-Honoré, 71188 Saint-Quentin",
+  "streetAddress" : "6461 Boulevard de l'Odéon",
+  "state" : "Nord-Pas-de-Calais",
+  "timeZone" : "America/Caracas",
+  "city" : "Ivry-sur-Seine",
+  "creditCardType" : "jcb",
+  "creditCardNumber" : "1234-2121-1221-1211",
+  "creditCardExpiry" : "2015-11-11",
+  "title" : "Le Couloir de tous les mépris",
+  "author" : "Henry Romain",
+  "genre" : "Mystery",
+  "publisher" : "Les Éditions jaune turquoise",
+  "blend" : "Express Star",
+  "color" : "brun",
+  "hexColor" : "#A4E867",
+  "bloodGroup" : "A-"
+}
+
+----
+
+a|
+----
+{
+  "___GENERATOR_SPEC": {
+    "___LOCALIZATION": {
+      "language": "fr",
+      "country": "CA"
+    },
+    "___FIELDS": {
+      "someStaticField": {
+        "type": "IDENTITY"
+      },
+      "id": {
+        "type": "RANDOM_UUID"
+      },
+      "someOneOf": {
+        "type": "ONE_OF",
+        "parameters": {
+          "values": ["B1", "B2", "AX"]
+        }
+      }
+    }
+  },
+  "someStaticField": "static",
+  "id": "b66aef25-de3b-4761-8db2-b66793043aac",
+  "someOneOf": "B2",
+  "fullName": "ab",
+  "firstName": "a",
+  "lastName": "b",
+  "gender": "Unknown",
+  "address": "123 Bond St, Paris, FR",
+  "streetAddress": "123 Bond St",
+  "state": "AS",
+  "timeZone": "GMT",
+  "city": "Paris",
+  "creditCardType": "Visa",
+  "creditCardNumber": "1234567890123456",
+  "creditCardExpiry": "12/31/2022",
+  "title": "t",
+  "author": "",
+  "genre": "Finance",
+  "publisher": "RandomHouse",
+  "blend": "blend",
+  "color": "color",
+  "hexColor": "#12",
+  "bloodGroup": "A"
+}
+----
+
+a|
+----
+{
+  "someStaticField" : "static",
+  "id" : "36223e50-5c7e-4d57-bdb6-76169d37d9df",
+  "someOneOf" : "B1",
+  "fullName" : "Mme Louna André",
+  "firstName" : "Lisa",
+  "lastName" : "Maillard",
+  "gender" : "Bigender",
+  "address" : "Apt. 522,  d'Orsel 6027, Y7Z3X6 Dijon",
+  "streetAddress" : " de l'Odéon 477",
+  "state" : "Ontario",
+  "timeZone" : "Australia/Melbourne",
+  "city" : "Marseille",
+  "creditCardType" : "visa",
+  "creditCardNumber" : "1211-1221-1234-2201",
+  "creditCardExpiry" : "2013-9-12",
+  "title" : "L'Odyssée invisible",
+  "author" : "Jade Cousin",
+  "genre" : "Humor",
+  "publisher" : "Au lecteur éclairé",
+  "blend" : "Green Symphony",
+  "color" : "rose",
+  "hexColor" : "#414520",
+  "bloodGroup" : "A+"
+}
+
+----
+
+a|
+----
+{
+  "___GENERATOR_SPEC": {
+    "___LOCALIZATION": {
+      "language": "en",
+      "country": "US"
+    },
+    "___FIELDS": {
+      "someStaticField": {
+        "type": "IDENTITY"
+      },
+      "id": {
+        "type": "RANDOM_UUID"
+      },
+      "someOneOf": {
+        "type": "ONE_OF",
+        "parameters": {
+          "values": ["B1", "B2", "AX"]
+        }
+      }
+    }
+  },
+  "someStaticField": "static",
+  "id": "b66aef25-de3b-4761-8db2-b66793043aac",
+  "someOneOf": "B2",
+  "fullName": "ab",
+  "firstName": "a",
+  "lastName": "b",
+  "gender": "Unknown",
+  "address": "123 Bond St, Paris, FR",
+  "streetAddress": "123 Bond St",
+  "state": "AS",
+  "timeZone": "GMT",
+  "city": "Paris",
+  "creditCardType": "Visa",
+  "creditCardNumber": "1234567890123456",
+  "creditCardExpiry": "12/31/2022",
+  "title": "t",
+  "author": "",
+  "genre": "Finance",
+  "publisher": "RandomHouse",
+  "blend": "blend",
+  "color": "color",
+  "hexColor": "#12",
+  "bloodGroup": "A"
+}
+----
+
+a|
+----
+{
+  "someStaticField" : "static",
+  "id" : "dd817db0-41db-4f9b-ab1e-86768337ffef",
+  "someOneOf" : "B1",
+  "fullName" : "Argentina Kirlin",
+  "firstName" : "Meagan",
+  "lastName" : "Anderson",
+  "gender" : "Bigender",
+  "address" : "Apt. 826 726 Larry Haven, Myraburgh, MI 72998",
+  "streetAddress" : "26619 Hoppe Run",
+  "state" : "South Dakota",
+  "timeZone" : "America/New_York",
+  "city" : "Kesslerton",
+  "creditCardType" : "mastercard",
+  "creditCardNumber" : "1211-1221-1234-2201",
+  "creditCardExpiry" : "2011-10-12",
+  "title" : "Vile Bodies",
+  "author" : "Francesco Lebsack",
+  "genre" : "Short story",
+  "publisher" : "Airiti Press",
+  "blend" : "Red Been",
+  "color" : "ivory",
+  "hexColor" : "#B9FBDB",
+  "bloodGroup" : "O+"
+}
+
+----
+
+|===
+
 See the `JsonToJsonGeneratorTest` class for canonical ways to invoke the random Json generator.
 
 This project depends on the `net.datafaker:datafaker` library. That library generates fake json, similar to the javascript `faker.js` library or the python `faker` package.
