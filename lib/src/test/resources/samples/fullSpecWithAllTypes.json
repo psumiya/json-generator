@@ -48,5 +48,8 @@
   "color": "color",
   "hexColor": "#12",
 
-  "bloodGroup": "A"
+  "bloodGroup": "A",
+
+  "currency": "USD",
+  "currencyName": "US Dollars"
 }

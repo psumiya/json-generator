@@ -44,6 +44,9 @@ public enum RandomizerType {
     COLOR("color", faker -> faker.color().name()),
     COLOR_HEX("hexColor", faker -> faker.color().hex()),
 
+    CURRENCY("currency", faker -> faker.currency().code()),
+    CURRENCY_NAME("currencyName", faker -> faker.currency().name()),
+
     BLOOD_GROUP("bloodGroup", faker -> faker.bloodtype().bloodGroup());
 
     public static final Map<RandomizerType, Randomizer<JsonNode>> BASE_SPEC_PROVIDER_MAP = new HashMap<>();
