@@ -21,8 +21,8 @@ public record JsonToJsonGenerator(JsonGeneratorModel jsonGeneratorModel) impleme
     @Override
     public String generate(String input) {
         RandomizerInput randomizerInput = getRandomizerInput(input);
-        JsonGenerator<RandomizerInput, JsonNode> randomizer = getGenerator();
-        JsonNode randomized = randomizer.generate(randomizerInput);
+        JsonGenerator<RandomizerInput, JsonNode> jsonNodeGenerator = getJsonNodeGenerator();
+        JsonNode randomized = jsonNodeGenerator.generate(randomizerInput);
         try {
             return jsonGeneratorModel.objectMapper().writeValueAsString(randomized);
         } catch (JsonProcessingException e) {
@@ -30,8 +30,8 @@ public record JsonToJsonGenerator(JsonGeneratorModel jsonGeneratorModel) impleme
         }
     }
 
-    private JsonGenerator<RandomizerInput, JsonNode> getGenerator() {
-        return new Generator(jsonGeneratorModel);
+    private JsonGenerator<RandomizerInput, JsonNode> getJsonNodeGenerator() {
+        return new JsonNodeGenerator(jsonGeneratorModel);
     }
 
     private RandomizerInput getRandomizerInput(String input) {

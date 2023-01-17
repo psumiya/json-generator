@@ -14,7 +14,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.*;
 
-public record Generator(JsonGeneratorModel jsonGeneratorModel) implements JsonGenerator<RandomizerInput, JsonNode> {
+public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implements JsonGenerator<RandomizerInput, JsonNode> {
 
     private static final JsonNodeFactory JSON_NODE_FACTORY = JsonNodeFactory.instance;
 

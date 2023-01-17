@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
-public class PerformanceTest {
+public class Benchmark {
 
     private static final String FILE_NAME = "src/jmh/resources/samples/root_is_object.json";
 
@@ -26,7 +26,7 @@ public class PerformanceTest {
         }
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     @Fork(value = 3, warmups = 2)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @BenchmarkMode(Mode.AverageTime)
