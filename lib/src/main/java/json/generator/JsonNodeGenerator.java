@@ -20,8 +20,11 @@ public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implement
 
     @Override
     public JsonNode generate(RandomizerInput input) {
-        JsonNode jsonNode = input.objectToRandomize();
+        initialize(input);
+        return randomize(input.objectToRandomize(), input);
+    }
 
+    private void initialize(RandomizerInput input) {
         Localization localizationSpec = input.generatorSpec().localizationSpec();
         Locale locale = new Locale.Builder()
                 .setLanguage(localizationSpec.language())
@@ -29,8 +32,6 @@ public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implement
                 .build();
         Faker faker = new Faker(locale);
         RandomizerType.initializeProviders(faker);
-
-        return randomize(jsonNode, input);
     }
 
     private JsonNode randomize(JsonNode jsonNode, RandomizerInput input) {
