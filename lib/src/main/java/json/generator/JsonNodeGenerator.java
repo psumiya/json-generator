@@ -20,20 +20,23 @@ public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implement
 
     @Override
     public JsonNode generate(RandomizerInput input) {
-        return randomize(input.objectToRandomize(), input);
-    }
+        JsonNode jsonNode = input.objectToRandomize();
 
-    private JsonNode randomize(JsonNode jsonNode, RandomizerInput input) {
-        JsonNodeType nodeType = jsonNode.getNodeType();
-        Random random = new Random();
         Localization localizationSpec = input.generatorSpec().localizationSpec();
         Locale locale = new Locale.Builder()
                 .setLanguage(localizationSpec.language())
                 .setRegion(localizationSpec.country())
                 .build();
-        Map<String, BaseSpec> fieldSpecMap = input.generatorSpec().fieldSpec().fieldSpecMap();
         Faker faker = new Faker(locale);
         RandomizerType.initializeProviders(faker);
+
+        return randomize(jsonNode, input);
+    }
+
+    private JsonNode randomize(JsonNode jsonNode, RandomizerInput input) {
+        JsonNodeType nodeType = jsonNode.getNodeType();
+        Random random = new Random();
+        Map<String, BaseSpec> fieldSpecMap = input.generatorSpec().fieldSpec().fieldSpecMap();
         switch (nodeType) {
             case NUMBER -> {
                 return JSON_NODE_FACTORY.numberNode(random.nextInt(Integer.MAX_VALUE));
