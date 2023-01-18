@@ -8,6 +8,7 @@ import json.generator.model.BaseSpec;
 import json.generator.model.JsonGeneratorModel;
 import json.generator.model.Localization;
 import json.generator.model.RandomizerInput;
+import json.generator.randomizer.Randomizer;
 import json.generator.randomizer.RandomizerType;
 import net.datafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -20,22 +21,22 @@ public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implement
 
     @Override
     public JsonNode generate(RandomizerInput input) {
-        initialize(input);
+        Map<RandomizerType, Randomizer<JsonNode>> baseSpecProviderMap = initialize(input);
         Random random = new Random();
-        return randomize(input.objectToRandomize(), input, random);
+        return randomize(input.objectToRandomize(), input, random, baseSpecProviderMap);
     }
 
-    private void initialize(RandomizerInput input) {
+    private Map<RandomizerType, Randomizer<JsonNode>> initialize(RandomizerInput input) {
         Localization localizationSpec = input.generatorSpec().localizationSpec();
         Locale locale = new Locale.Builder()
                 .setLanguage(localizationSpec.language())
                 .setRegion(localizationSpec.country())
                 .build();
         Faker faker = new Faker(locale);
-        RandomizerType.initializeProviders(faker);
+        return RandomizerType.initializeProviders(faker);
     }
 
-    private JsonNode randomize(JsonNode jsonNode, RandomizerInput input, Random random) {
+    private JsonNode randomize(JsonNode jsonNode, RandomizerInput input, Random random, Map<RandomizerType, Randomizer<JsonNode>> baseSpecProviderMap) {
         JsonNodeType nodeType = jsonNode.getNodeType();
         Map<String, BaseSpec> fieldSpecMap = input.generatorSpec().fieldSpec().fieldSpecMap();
         switch (nodeType) {
@@ -48,7 +49,7 @@ public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implement
             case BOOLEAN -> {
                 return JSON_NODE_FACTORY.booleanNode(random.nextBoolean());
             }
-            case OBJECT -> jsonNode.fields().forEachRemaining(field -> randomizeField(random, field, input, fieldSpecMap));
+            case OBJECT -> jsonNode.fields().forEachRemaining(field -> randomizeField(random, field, input, fieldSpecMap, baseSpecProviderMap));
             case ARRAY -> {
                 int size = jsonNode.size();
                 if (size == 0) {
@@ -58,7 +59,7 @@ public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implement
                 int newSize = random.nextInt(jsonGeneratorModel.maxRandomArraySize());
                 List<JsonNode> nodeList = new ArrayList<>(newSize);
                 for (int i = 0; i < newSize; i++) {
-                    nodeList.add(randomize(sample.deepCopy(), input, random));
+                    nodeList.add(randomize(sample.deepCopy(), input, random, baseSpecProviderMap));
                 }
                 ((ArrayNode) jsonNode).addAll(nodeList);
             }
@@ -66,11 +67,11 @@ public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implement
         return jsonNode;
     }
 
-    private void randomizeField(Random random, Map.Entry<String, JsonNode> field, RandomizerInput input, Map<String, BaseSpec> fieldSpecMap) {
+    private void randomizeField(Random random, Map.Entry<String, JsonNode> field, RandomizerInput input, Map<String, BaseSpec> fieldSpecMap, Map<RandomizerType, Randomizer<JsonNode>> baseSpecProviderMap) {
         if (fieldSpecMap.containsKey(field.getKey())) {
             BaseSpec baseSpec = fieldSpecMap.get(field.getKey());
             RandomizerType type = baseSpec.type();
-            JsonNode fieldValue = Optional.ofNullable(RandomizerType.BASE_SPEC_PROVIDER_MAP.get(type))
+            JsonNode fieldValue = Optional.ofNullable(baseSpecProviderMap.get(type))
                     .map(randomizerType -> randomizerType.generate(baseSpec, field.getValue()))
                     .orElse(JSON_NODE_FACTORY.missingNode());
             field.setValue(fieldValue);
@@ -82,7 +83,7 @@ public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implement
                 case BOOLEAN -> field.setValue(JSON_NODE_FACTORY.booleanNode(random.nextBoolean()));
             }
         } else {
-            field.setValue(randomize(field.getValue(), input, random));
+            field.setValue(randomize(field.getValue(), input, random, baseSpecProviderMap));
         }
     }
 

@@ -49,8 +49,6 @@ public enum RandomizerType {
 
     BLOOD_GROUP("bloodGroup", faker -> faker.bloodtype().bloodGroup());
 
-    public static final Map<RandomizerType, Randomizer<JsonNode>> BASE_SPEC_PROVIDER_MAP = new HashMap<>();
-
     public static final Map<String, BaseSpec> DEFAULT_FIELD_SPEC_MAP = new HashMap<>();
 
     public static final Map<RandomizerType, Function<Faker, String>> FAKER_FUNCTION_MAP = new HashMap<>();
@@ -76,18 +74,20 @@ public enum RandomizerType {
         }
     }
 
-    public static void initializeProviders(Faker faker) {
+    public static Map<RandomizerType, Randomizer<JsonNode>> initializeProviders(Faker faker) {
+        Map<RandomizerType, Randomizer<JsonNode>> baseSpecProviderMap = new HashMap<>();
         Randomizer<JsonNode> randomUUIDProvider = (baseSpec, jsonNode) -> JsonNodeFactory.instance.textNode(UUID.randomUUID().toString());
         OneOfRandomizer oneOfProvider = new OneOfRandomizer();
         FakerRandomizer fakerProvider = new FakerRandomizer(faker);
         for (RandomizerType randomizerType : RandomizerType.values()) {
             switch (randomizerType) {
-                case IDENTITY -> BASE_SPEC_PROVIDER_MAP.put(randomizerType, (baseSpec, jsonNode) -> jsonNode);
-                case RANDOM_UUID -> BASE_SPEC_PROVIDER_MAP.put(randomizerType, randomUUIDProvider);
-                case ONE_OF -> BASE_SPEC_PROVIDER_MAP.put(randomizerType, oneOfProvider);
-                default -> BASE_SPEC_PROVIDER_MAP.put(randomizerType, fakerProvider);
+                case IDENTITY -> baseSpecProviderMap.put(randomizerType, (baseSpec, jsonNode) -> jsonNode);
+                case RANDOM_UUID -> baseSpecProviderMap.put(randomizerType, randomUUIDProvider);
+                case ONE_OF -> baseSpecProviderMap.put(randomizerType, oneOfProvider);
+                default -> baseSpecProviderMap.put(randomizerType, fakerProvider);
             }
         }
+        return baseSpecProviderMap;
     }
 
 }
