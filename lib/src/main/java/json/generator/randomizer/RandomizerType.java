@@ -42,7 +42,7 @@ public enum RandomizerType {
     COFFEE_BLEND("blend", faker -> faker.coffee().blendName()),
 
     COLOR("color", faker -> faker.color().name()),
-    COLOR_HEX("hexColor", faker -> faker.color().hex()),
+    COLOR_HEX("hexColor", faker -> faker.color().hex(true)),
 
     CURRENCY("currency", faker -> faker.currency().code()),
     CURRENCY_NAME("currencyName", faker -> faker.currency().name()),
