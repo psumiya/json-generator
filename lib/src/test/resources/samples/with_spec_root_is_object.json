@@ -4,20 +4,27 @@
       "language": "es",
       "country": "MX"
     },
-    "___FIELDS": {
-      "id": {
-        "type": "RANDOM_UUID"
+    "___FIELDS": [
+      {
+        "fieldName": "someStaticField",
+        "generatorName": "IDENTITY"
       },
-      "someStaticField": {
-        "type": "IDENTITY"
+      {
+        "fieldName": "id",
+        "generatorName": "RANDOM_UUID"
       },
-      "someOneOf": {
-        "type": "ONE_OF",
+      {
+        "fieldName": "someOneOf",
+        "generatorName": "ONE_OF",
         "parameters": {
-          "values": ["B1", "B2", "AX"]
+          "values": [
+            "B1",
+            "B2",
+            "AX"
+          ]
         }
       }
-    }
+    ]
   },
   "id": "b66aef25-de3b-4761-8db2-b66793043aac",
   "username": "string",

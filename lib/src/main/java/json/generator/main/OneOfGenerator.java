@@ -1,21 +1,27 @@
-package json.generator.randomizer;
+package json.generator.main;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import json.generator.model.BaseSpec;
+import json.generator.FieldGenerator;
+import json.generator.model.FieldConfiguration;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public record OneOfRandomizer() implements Randomizer<JsonNode> {
+public class OneOfGenerator implements FieldGenerator {
 
     private static final JsonNodeFactory JSON_NODE_FACTORY = JsonNodeFactory.instance;
     private static final String VALUES = "values";
 
     @Override
-    public JsonNode generate(BaseSpec baseSpec, JsonNode sampleValue) {
-        Map<String, Object> parameters = baseSpec.parameters();
+    public String getFieldName() {
+        return "ONE_OF";
+    }
+
+    @Override
+    public JsonNode generate(FieldConfiguration configuration, JsonNode seedValue) {
+        Map<String, Object> parameters = configuration.parameters();
         Object values = parameters.get(VALUES);
         if (values instanceof List<?> possibleItems) {
             int size = possibleItems.size();
