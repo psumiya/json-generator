@@ -84,9 +84,15 @@ public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implement
     }
 
     private void randomizeField(Random random, Map.Entry<String, JsonNode> field, RandomizerInput input, Map<String, FieldConfiguration> fieldConfigurationMap, Map<String, FieldGenerator> fieldGeneratorMap) {
-        if (fieldGeneratorMap.containsKey(field.getKey())) {
-            FieldGenerator fieldGenerator = fieldGeneratorMap.get(field.getKey());
+        if (fieldConfigurationMap.containsKey(field.getKey())) {
             FieldConfiguration fieldConfiguration = fieldConfigurationMap.get(field.getKey());
+            FieldGenerator fieldGenerator = fieldGeneratorMap.get(fieldConfiguration.generatorName());
+            JsonNode fieldValue = Optional.ofNullable(fieldGenerator.generate(fieldConfiguration, field.getValue()))
+                    .orElse(JSON_NODE_FACTORY.missingNode());
+            field.setValue(fieldValue);
+        } else if (fieldGeneratorMap.containsKey(field.getKey())) {
+            FieldConfiguration fieldConfiguration = fieldConfigurationMap.get(field.getKey());
+            FieldGenerator fieldGenerator = fieldGeneratorMap.get(field.getKey());
             JsonNode fieldValue = Optional.ofNullable(fieldGenerator.generate(fieldConfiguration, field.getValue()))
                     .orElse(JSON_NODE_FACTORY.missingNode());
             field.setValue(fieldValue);
