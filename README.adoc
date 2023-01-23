@@ -10,6 +10,20 @@ The method generates a random Json based on the input provided. To see some exam
 
 The library takes an opinionated view of what things to randomize and how to go about it.
 
+== Usage
+
+Run FullSpecTest to see randomized output for an input with all supported fields and spec.
+
+See the `JsonToJsonGeneratorTest` class for canonical ways to invoke the random Json generator.
+
+This project depends on the `net.datafaker:datafaker` library. That library generates fake json, similar to the javascript `faker.js` library or the python `faker` package.
+
+The default language supported for this library is `en`, and the default region is `US`.
+
+This library can be used in situations where you may want to randomize the data being used across test runs. For example, given a sample, this library can keep generating different data across each run, which can help with better performance test of your system.
+
+NOTE: While the library tries to generate random data, it is possible it can randomly generate some data that is not fake. Exercise caution around its usage.
+
 == Performance
 
 To evaluate performance, a performance benchmark is provided in the `src/jmh` directory.
