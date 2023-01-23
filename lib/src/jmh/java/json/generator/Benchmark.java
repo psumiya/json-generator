@@ -13,7 +13,7 @@ public class Benchmark {
 
     private static final String FILE_NAME = "src/jmh/resources/samples/root_is_object.json";
 
-    private static final JsonGenerator<String, String> jsonGenerator = new JsonToJsonGenerator(new JsonGeneratorModel());
+    private static final Generator<String, String> GENERATOR = new JsonToJsonGenerator(new JsonGeneratorModel());
 
     private static final String SAMPLE;
 
@@ -32,7 +32,7 @@ public class Benchmark {
     @BenchmarkMode(Mode.AverageTime)
     @OperationsPerInvocation(10)
     public String executeMethodToBenchmark() {
-        return jsonGenerator.generate(SAMPLE);
+        return GENERATOR.generate(SAMPLE);
     }
 
     public static void main(String[] args) throws Exception {

@@ -17,7 +17,7 @@ public class FullSpecTest {
     private static String FILE_NAME = "src/test/resources/samples/fullSpecWithAllTypes.json";
 
     private static JsonGeneratorModel JSON_GENERATOR_MODEL = new JsonGeneratorModel(new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT));
-    private static JsonGenerator<String, String> JSON_GENERATOR = new JsonToJsonGenerator(JSON_GENERATOR_MODEL);
+    private static Generator<String, String> JSON_GENERATOR = new JsonToJsonGenerator(JSON_GENERATOR_MODEL);
 
     private static String FULL_SPEC_fr_FR = getFileContentAsString(FILE_NAME);
 

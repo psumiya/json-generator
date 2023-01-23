@@ -10,6 +10,8 @@ The method generates a random Json based on the input provided. For example, her
 
 The library takes an opinionated view of what things to randomize and how to go about it.
 
+// TODO Fix these examples
+
 [cols="1,1"]
 |===
 |Input |Output
@@ -474,3 +476,26 @@ The test was executed on a Mac with the following configuration:
 * Memory: 8 GB 2133 MHz LPDDR3
 
 Note that the above is just data and not a repeatable insight.
+
+
+=== Updated results after refactor.
+
+[source:shell]
+----
+Iteration   1: 24.095 ms/opNG [7m 45s]
+Iteration   2: 23.740 ms/opNG [7m 55s]
+Iteration   3: 22.989 ms/opNG [8m 5s]
+Iteration   4: 23.197 ms/opNG [8m 15s]
+Iteration   5: 22.819 ms/opNG [8m 25s]
+
+
+Result "json.generator.Benchmark.executeMethodToBenchmark":
+  28.216 ±(99.9%) 6.692 ms/op [Average]
+  (min, avg, max) = (22.819, 28.216, 45.607), stdev = 6.260
+  CI (99.9%): [21.524, 34.907] (assumes normal distribution)
+.
+.
+.
+Benchmark                           Mode  Cnt   Score   Error  Units
+Benchmark.executeMethodToBenchmark  avgt   15  28.216 ± 6.692  ms/op
+----
