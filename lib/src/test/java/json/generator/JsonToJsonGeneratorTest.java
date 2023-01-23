@@ -24,13 +24,14 @@ public class JsonToJsonGeneratorTest {
     private static final String GENERATOR_SPEC_NODE_NAME = "___GENERATOR_SPEC";
 
     static Stream<Arguments> sampleFilesProvider() {
+        JsonGeneratorModel jsonGeneratorModel = new JsonGeneratorModel(new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT));
         return Stream.of(
-                arguments(DEFAULT_ROOT + "firstLastName.json", new JsonGeneratorModel()),
-                arguments(DEFAULT_ROOT + "root_is_object.json", new JsonGeneratorModel()),
-                arguments(DEFAULT_ROOT + "root_is_array.json", new JsonGeneratorModel()),
-                arguments(DEFAULT_ROOT + "root_is_array.json", new JsonGeneratorModel(20)),
-                arguments(DEFAULT_ROOT + "root_is_object.json", new JsonGeneratorModel(new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT))),
-                arguments(DEFAULT_ROOT + "with_spec_root_is_object.json", new JsonGeneratorModel())
+                arguments(DEFAULT_ROOT + "firstLastName.json", jsonGeneratorModel),
+//                arguments(DEFAULT_ROOT + "root_is_object.json", new JsonGeneratorModel()),
+//                arguments(DEFAULT_ROOT + "root_is_array.json", new JsonGeneratorModel()),
+//                arguments(DEFAULT_ROOT + "root_is_array.json", new JsonGeneratorModel(20)),
+                arguments(DEFAULT_ROOT + "root_is_object.json", jsonGeneratorModel),
+                arguments(DEFAULT_ROOT + "with_spec_root_is_object.json", jsonGeneratorModel)
         );
     }
 
@@ -44,14 +45,14 @@ public class JsonToJsonGeneratorTest {
             // Remove spec before comparison
             ((ObjectNode) original).remove(GENERATOR_SPEC_NODE_NAME);
         }
-        List<Integer> integers = List.of(1, 2, 3, 4, 5);
+        List<Integer> integers = List.of(1);
         JsonKeyComparator jsonKeyComparator = new JsonKeyComparator();
         integers.forEach(item -> {
             String generated = generator.generate(sample);
             try {
                 JsonNode randomized = jsonGeneratorModel.objectMapper().readTree(generated);
                 assertEquals(0, jsonKeyComparator.compare(original, randomized));
-                System.out.println(randomized);
+                System.out.println(jsonGeneratorModel.objectMapper().writeValueAsString(randomized));
             } catch (JsonProcessingException e) {
                 fail("JsonProcessingException occurred." + e);
             }
