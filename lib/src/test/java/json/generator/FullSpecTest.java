@@ -36,6 +36,9 @@ public class FullSpecTest {
     public void test(String locale, String spec) {
         String result = JSON_GENERATOR.generate(spec);
         System.out.println("Localization language-region :: " + locale);
+        System.out.println("====== Input ======");
+        System.out.println(spec);
+        System.out.println("====== Output ======");
         System.out.println(result);
     }
 

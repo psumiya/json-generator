@@ -27,9 +27,9 @@ public class JsonToJsonGeneratorTest {
         JsonGeneratorModel jsonGeneratorModel = new JsonGeneratorModel(new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT));
         return Stream.of(
                 arguments(DEFAULT_ROOT + "firstLastName.json", jsonGeneratorModel),
-//                arguments(DEFAULT_ROOT + "root_is_object.json", new JsonGeneratorModel()),
-//                arguments(DEFAULT_ROOT + "root_is_array.json", new JsonGeneratorModel()),
-//                arguments(DEFAULT_ROOT + "root_is_array.json", new JsonGeneratorModel(20)),
+                arguments(DEFAULT_ROOT + "root_is_object.json", new JsonGeneratorModel()),
+                arguments(DEFAULT_ROOT + "root_is_array.json", new JsonGeneratorModel()),
+                arguments(DEFAULT_ROOT + "root_is_array.json", new JsonGeneratorModel(20)),
                 arguments(DEFAULT_ROOT + "root_is_object.json", jsonGeneratorModel),
                 arguments(DEFAULT_ROOT + "with_spec_root_is_object.json", jsonGeneratorModel)
         );

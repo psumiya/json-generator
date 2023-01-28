@@ -76,6 +76,102 @@ a|
 {
   "___GENERATOR_SPEC": {
     "___LOCALIZATION": {
+      "language": "en",
+      "country": "US"
+    },
+    "___FIELDS": [
+      {
+        "fieldName": "someStaticField",
+        "generatorName": "IDENTITY"
+      },
+      {
+        "fieldName": "id",
+        "generatorName": "RANDOM_UUID"
+      },
+      {
+        "fieldName": "someOneOf",
+        "generatorName": "ONE_OF",
+        "parameters": {
+          "values": [
+            "B1",
+            "B2",
+            "AX"
+          ]
+        }
+      }
+    ]
+  },
+  "someStaticField": "static",
+  "id": "b66aef25-de3b-4761-8db2-b66793043aac",
+  "someOneOf": "B2",
+
+  "fullName": "ab",
+  "firstName": "a",
+  "lastName": "b",
+  "gender": "Unknown",
+
+  "address": "123 Bond St, Paris, FR",
+  "streetAddress": "123 Bond St",
+  "state": "AS",
+  "timeZone": "GMT",
+  "city": "Paris",
+
+  "creditCardType": "Visa",
+  "creditCardNumber": "1234567890123456",
+  "creditCardExpiry": "12/31/2022",
+
+  "title": "t",
+  "author": "",
+  "genre": "Finance",
+  "publisher": "RandomHouse",
+
+  "blend": "blend",
+
+  "color": "color",
+  "hexColor": "#12",
+
+  "bloodGroup": "A",
+
+  "currency": "USD",
+  "currencyName": "US Dollars"
+}
+----
+
+a|
+----
+{
+  "someStaticField": "static",
+  "id": "ab1fe802-7a0a-439e-b754-3ff290f91af9",
+  "someOneOf": "AX",
+  "fullName": "Silas Oberbrunner",
+  "firstName": "Pat",
+  "lastName": "Ondricka",
+  "gender": "Male",
+  "address": "8424 O'Connell Falls, North Chaya, LA 19058",
+  "streetAddress": "74398 Patrick Forest",
+  "state": "Washington",
+  "timeZone": "Asia/Kolkata",
+  "city": "New Erline",
+  "creditCardType": "maestro",
+  "creditCardNumber": "1234-2121-1221-1211",
+  "creditCardExpiry": "2013-9-12",
+  "title": "A Swiftly Tilting Planet",
+  "author": "Suzette Bailey",
+  "genre": "Narrative nonfiction",
+  "publisher": "Borgo Press",
+  "blend": "Goodbye Mug",
+  "color": "orange",
+  "hexColor": "#B7D87D",
+  "bloodGroup": "A-",
+  "currency": "LAK",
+  "currencyName": "Swedish Krona"
+}
+
+a|
+----
+{
+  "___GENERATOR_SPEC": {
+    "___LOCALIZATION": {
       "language": "es",
       "country": "MX"
     },
