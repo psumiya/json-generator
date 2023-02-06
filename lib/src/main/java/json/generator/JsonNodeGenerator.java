@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
+import json.generator.api.Generator;
 import json.generator.model.JsonGeneratorModel;
 import json.generator.model.Localization;
 import json.generator.factory.FieldGeneratorFactory;

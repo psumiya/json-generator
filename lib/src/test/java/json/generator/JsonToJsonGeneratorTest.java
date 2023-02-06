@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import json.generator.api.Generator;
+import json.generator.api.GeneratorFactory;
 import json.generator.model.JsonGeneratorModel;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -38,7 +40,7 @@ public class JsonToJsonGeneratorTest {
     @ParameterizedTest
     @MethodSource("sampleFilesProvider")
     public void test(String fileName, JsonGeneratorModel jsonGeneratorModel) throws JsonProcessingException {
-        Generator<String, String> generator = new JsonToJsonGenerator(jsonGeneratorModel);
+        Generator<String, String> generator = GeneratorFactory.getGeneratorWithModel(jsonGeneratorModel);
         String sample = getFileContentAsString(fileName);
         JsonNode original = jsonGeneratorModel.objectMapper().readTree(sample);
         if (original instanceof ObjectNode) {

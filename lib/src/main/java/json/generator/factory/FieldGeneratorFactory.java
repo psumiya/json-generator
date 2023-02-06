@@ -1,11 +1,8 @@
 package json.generator.factory;
 
 import json.generator.FieldGenerator;
-import json.generator.faker.*;
-import json.generator.main.IdentityGenerator;
+import json.generator.faker.FakerFactory;
 import json.generator.main.MainFactory;
-import json.generator.main.OneOfGenerator;
-import json.generator.main.RandomUUIDGenerator;
 import net.datafaker.Faker;
 
 import java.util.ArrayList;
