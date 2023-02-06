@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id "me.champeau.jmh" version "0.6.8"
+    id "maven-publish"
 }
 
 repositories {
@@ -28,4 +29,27 @@ tasks.named('test') {
 tasks.withType(JavaCompile) {
     options.compilerArgs << '-Xlint:deprecation'
     options.deprecation = true
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/psumiya/json-generator")
+            credentials {
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
+            }
+        }
+        publications {
+            gpr(MavenPublication) {
+                from components.java
+            }
+        }
+    }
 }
