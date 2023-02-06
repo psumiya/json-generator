@@ -1,0 +1,66 @@
+plugins {
+    id 'java-library'
+    id "me.champeau.jmh" version "0.6.8"
+    id "maven-publish"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Use JUnit Jupiter for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.1'
+    testImplementation 'org.openjdk.jmh:jmh-core:1.36'
+    testImplementation 'org.openjdk.jmh:jmh-generator-annprocess:1.36'
+
+    // These dependencies are required on consumers compile classpath.
+    api 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+
+    // These dependencies are used internally, and not exposed to consumers on their own compile classpath.
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'net.datafaker:datafaker:1.6.0'
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:deprecation'
+    options.deprecation = true
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+version = '0.0.1'
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/psumiya/json-generator")
+            credentials {
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
+            }
+        }
+        publications {
+            gpr(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version)
+    }
+}
