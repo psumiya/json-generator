@@ -1,5 +1,6 @@
 package json.generator;
 
+import json.generator.api.Generator;
 import json.generator.model.JsonGeneratorModel;
 import org.openjdk.jmh.annotations.*;
 

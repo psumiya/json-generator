@@ -2,6 +2,7 @@ package json.generator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import json.generator.api.Generator;
 import json.generator.model.JsonGeneratorModel;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

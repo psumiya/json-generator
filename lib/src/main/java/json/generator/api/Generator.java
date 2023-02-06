@@ -1,4 +1,4 @@
-package json.generator;
+package json.generator.api;
 
 public interface Generator<I, O> {
 
