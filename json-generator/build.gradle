@@ -15,8 +15,10 @@ dependencies {
     testImplementation 'org.openjdk.jmh:jmh-core:1.36'
     testImplementation 'org.openjdk.jmh:jmh-generator-annprocess:1.36'
 
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+    // These dependencies are required on consumers compile classpath.
+    api 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+
+    // These dependencies are used internally, and not exposed to consumers on their own compile classpath.
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'net.datafaker:datafaker:1.6.0'
 }
@@ -36,6 +38,8 @@ java {
     withJavadocJar()
 }
 
+version = '0.0.1'
+
 publishing {
     repositories {
         maven {
@@ -51,5 +55,12 @@ publishing {
                 from components.java
             }
         }
+    }
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version)
     }
 }

@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'json-generator'
-include('lib')
+include('json-generator')
