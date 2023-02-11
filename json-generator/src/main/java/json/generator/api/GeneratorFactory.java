@@ -17,6 +17,7 @@ public final class GeneratorFactory {
     }
 
     /**
+     * Get a default generator
      *
      * @return a generator with default JsonGeneratorModel
      */
@@ -25,6 +26,7 @@ public final class GeneratorFactory {
     }
 
     /**
+     * Setup a generator.
      *
      * @param jsonGeneratorModel a model with customized input
      * @return a generator with given JsonGeneratorModel

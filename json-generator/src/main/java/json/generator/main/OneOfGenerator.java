@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class OneOfGenerator implements FieldGenerator {
+/**
+ * Generate one of the given values
+ */
+class OneOfGenerator implements FieldGenerator {
 
     private static final JsonNodeFactory JSON_NODE_FACTORY = JsonNodeFactory.instance;
     private static final String VALUES = "values";

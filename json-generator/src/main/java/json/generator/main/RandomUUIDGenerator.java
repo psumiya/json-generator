@@ -7,7 +7,10 @@ import json.generator.model.FieldConfiguration;
 
 import java.util.UUID;
 
-public class RandomUUIDGenerator implements FieldGenerator {
+/**
+ * Generator a random uuid
+ */
+class RandomUUIDGenerator implements FieldGenerator {
 
     @Override
     public String getFieldName() {

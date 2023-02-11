@@ -8,8 +8,20 @@ import net.datafaker.Faker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FakerFactory {
+/**
+ * Factory to generate faker field generators
+ */
+public final class FakerFactory {
 
+    private FakerFactory() {
+    }
+
+    /**
+     * Build faker generators.
+     *
+     * @param faker the faker instance
+     * @return list of faker field generators
+     */
     public static List<FieldGenerator> buildFakerGenerators(Faker faker) {
         FakerStringSupplier fakerStringSupplier = new FakerStringSupplier(faker);
         List<FieldGenerator> fakerGenerators = new ArrayList<>();
