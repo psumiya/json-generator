@@ -13,6 +13,11 @@ import json.generator.model.RandomizerInput;
 
 import java.util.List;
 
+/**
+ * The json generation model.
+ *
+ * @param jsonGeneratorModel the json generator model
+ */
 public record JsonToJsonGenerator(JsonGeneratorModel jsonGeneratorModel) implements Generator<String, String> {
 
     private static final String GENERATOR_SPEC_NODE_NAME = "___GENERATOR_SPEC";
