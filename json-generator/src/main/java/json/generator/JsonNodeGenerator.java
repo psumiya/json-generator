@@ -15,6 +15,11 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.*;
 
+/**
+ * Generate a JsoNode using the json generator model.
+ *
+ * @param jsonGeneratorModel the json generator model
+ */
 public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implements Generator<RandomizerInput, JsonNode> {
 
     private static final JsonNodeFactory JSON_NODE_FACTORY = JsonNodeFactory.instance;

@@ -4,7 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import json.generator.FieldGenerator;
 import json.generator.model.FieldConfiguration;
 
-public class IdentityGenerator implements FieldGenerator {
+/**
+ * Mimics Identity function
+ */
+class IdentityGenerator implements FieldGenerator {
 
     @Override
     public String getFieldName() {
