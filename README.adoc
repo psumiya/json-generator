@@ -6,7 +6,9 @@ This is an experimental project to generate random Json strings based on a given
 
 `String generate(String input)`
 
-The method generates a random Json based on the input provided. To see some examples, there are some randomly generated Json strings with corresponding inputs shown in https://github.com/psumiya/json-generator/blob/main/examples.adoc[examples.adoc]
+The method generates a random Json based on the input provided. To see some examples, here are some randomly generated Json strings for corresponding inputs.
+
+include::examples.adoc[]
 
 The library takes an opinionated view of what things to randomize and how to go about it.
 

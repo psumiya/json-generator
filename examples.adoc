@@ -1,4 +1,4 @@
-= Examples
+== Examples
 
 [cols="1,1"]
 |===
@@ -166,6 +166,7 @@ a|
   "currency": "LAK",
   "currencyName": "Swedish Krona"
 }
+----
 
 a|
 ----
@@ -214,8 +215,8 @@ a|
   "gender": "Unknown",
   "someOneOf": "B2"
 }
-----
 
+----
 a|
 ----
 {
@@ -234,3 +235,4 @@ a|
   "someOneOf" : "AX"
 }
 ----
+|===

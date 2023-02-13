@@ -25,6 +25,21 @@ public class JsonToJsonGeneratorTest {
 
     private static final String GENERATOR_SPEC_NODE_NAME = "___GENERATOR_SPEC";
 
+    static Stream<Arguments> sampleTypeProvider() {
+        return Stream.of(
+                arguments("firstName", """
+                        {
+                          "firstName": "someName"
+                        }
+                        """),
+                arguments("address", """
+                        {
+                          "address": "someAddress"
+                        }
+                        """)
+        );
+    }
+
     static Stream<Arguments> sampleFilesProvider() {
         JsonGeneratorModel jsonGeneratorModel = new JsonGeneratorModel(new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT));
         return Stream.of(
@@ -35,6 +50,15 @@ public class JsonToJsonGeneratorTest {
                 arguments(DEFAULT_ROOT + "root_is_object.json", jsonGeneratorModel),
                 arguments(DEFAULT_ROOT + "with_spec_root_is_object.json", jsonGeneratorModel)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource("sampleTypeProvider")
+    public void testTypes(String type, String json) {
+        Generator<String, String> generator = GeneratorFactory.getDefaultGenerator();
+        String generated = generator.generate(json);
+        System.out.println(generated);
+        assertTrue(generated.contains("\"" + type + "\":"), "Should contain " + type);
     }
 
     @ParameterizedTest
