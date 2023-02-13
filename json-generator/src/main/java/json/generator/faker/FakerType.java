@@ -1,6 +1,6 @@
 package json.generator.faker;
 
-import net.datafaker.Faker;
+import net.datafaker.*;
 
 import java.util.function.Function;
 
@@ -12,17 +12,17 @@ public enum FakerType {
     /**
      * Example: `Prof Evan Julian`
      */
-    FULL_NAME("fullName", faker -> faker.name().fullName()),
+    FULL_NAME("fullName", "name", name -> ((Name) name).fullName()),
 
     /**
      * Example: Victor
      */
-    FIRST_NAME("firstName", faker -> faker.name().firstName()),
+    FIRST_NAME("firstName", "name", name -> ((Name) name).firstName()),
 
     /**
      * Example: Lacroix
      */
-    LAST_NAME("lastName", faker -> faker.name().lastName()),
+    LAST_NAME("lastName", "name", name -> ((Name) name).lastName()),
 
     /**
      * Example: Male
@@ -32,62 +32,62 @@ public enum FakerType {
     /**
      * Example: 5010 Wiegand Hollow, Deanemouth, NM 20893
      */
-    ADDRESS("address", faker -> faker.address().fullAddress()),
+    ADDRESS("address", "address", address -> ((Address) address).fullAddress()),
 
     /**
      * Example: 406 Collier Bypass
      */
-    STREET_ADDRESS("streetAddress", faker -> faker.address().streetAddress()),
+    STREET_ADDRESS("streetAddress", "address", address -> ((Address) address).streetAddress()),
 
     /**
      * Example: Arkansas
      */
-    STATE("state", faker -> faker.address().state()),
+    STATE("state", "address", address -> ((Address) address).state()),
 
     /**
      * Example: Europe/Dublin
      */
-    TIME_ZONE("timeZone", faker -> faker.address().timeZone()),
+    TIME_ZONE("timeZone", "address", address -> ((Address) address).timeZone()),
 
     /**
      * Example: Davidhaven
      */
-    CITY("city", faker -> faker.address().city()),
+    CITY("city", "address", address -> ((Address) address).city()),
 
     /**
      * Example: diners_club
      */
-    CREDIT_CARD_TYPE("creditCardType", faker -> faker.business().creditCardType()),
+    CREDIT_CARD_TYPE("creditCardType", "business", business -> ((Business) business).creditCardType()),
 
     /**
      * Example: 1228-1221-1221-1431
      */
-    CREDIT_CARD_NUMBER("creditCardNumber", faker -> faker.business().creditCardNumber()),
+    CREDIT_CARD_NUMBER("creditCardNumber", "business", business -> ((Business) business).creditCardNumber()),
 
     /**
      * Example: 2011-10-12
      */
-    CREDIT_CARD_EXPIRY("creditCardExpiry", faker -> faker.business().creditCardExpiry()),
+    CREDIT_CARD_EXPIRY("creditCardExpiry", "business", business -> ((Business) business).creditCardExpiry()),
 
     /**
      * Example: The Needle's Eye
      */
-    BOOK_TITLE("title", faker -> faker.book().title()),
+    BOOK_TITLE("title", "book", book -> ((Book) book).title()),
 
     /**
      * Example: Coy Schmeler
      */
-    BOOK_AUTHOR("author", faker -> faker.book().author()),
+    BOOK_AUTHOR("author", "book", book -> ((Book) book).author()),
 
     /**
      * Example: Comic/Graphic Novel
      */
-    BOOK_GENRE("genre", faker -> faker.book().genre()),
+    BOOK_GENRE("genre", "book", book -> ((Book) book).genre()),
 
     /**
      * Example: Academic Press
      */
-    BOOK_PUBLISHER("publisher", faker -> faker.book().publisher()),
+    BOOK_PUBLISHER("publisher", "book", book -> ((Book) book).publisher()),
 
     /**
      * Example: Goodbye Blend
@@ -130,14 +130,46 @@ public enum FakerType {
     protected final Function<Faker, String> supplier;
 
     /**
+     * a group name for the field
+     */
+    protected final String groupName;
+
+    /**
+     * the abstract provider for the group, such as Name, Address, etc.
+     */
+    protected final Function<AbstractProvider, String> valueSupplier;
+
+    /**
      * Base FakerType
      *
      * @param fieldKey the field key
      * @param supplier the faker supplier
      */
+    /**
+     * Use for ungrouped types
+     *
+     * @param fieldKey the fieldKey
+     * @param supplier the supplier function
+     */
     FakerType(String fieldKey, Function<Faker, String> supplier) {
         this.fieldKey = fieldKey;
         this.supplier = supplier;
+        this.groupName = null;
+        this.valueSupplier = null;
+    }
+
+    /**
+     * Use for grouped types
+     *
+     * @param fieldKey the fieldKey
+     * @param groupName the groupName
+     * @param valueSupplier the valueSupplier
+     */
+    FakerType(String fieldKey, String groupName, Function<AbstractProvider, String> valueSupplier) {
+        this.fieldKey = fieldKey;
+        this.supplier = null;
+        this.groupName = groupName;
+        this.valueSupplier = valueSupplier;
     }
 
 }
