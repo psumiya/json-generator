@@ -14,9 +14,14 @@ The library takes an opinionated view of what things to randomize and how to go 
 
 == Usage
 
-Run FullSpecTest to see randomized output for an input with all supported fields and spec.
+----
+Generator<String, String> generator = GeneratorFactory.getDefaultGenerator();
+String generated = generator.generate(inputJson);
+----
 
-See the `JsonToJsonGeneratorTest` class for canonical ways to invoke the random Json generator.
+See the `JsonToJsonGeneratorTest` class for other canonical ways to invoke the random Json generator.
+
+Run FullSpecTest to see randomized output for an input with all supported fields and spec.
 
 This project depends on the `net.datafaker:datafaker` library. That library generates fake json, similar to the javascript `faker.js` library or the python `faker` package.
 
