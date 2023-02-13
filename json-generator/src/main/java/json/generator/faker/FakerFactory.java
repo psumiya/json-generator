@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import json.generator.FieldGenerator;
 import json.generator.model.FieldConfiguration;
 import net.datafaker.AbstractProvider;
-import net.datafaker.Address;
 import net.datafaker.Faker;
-import net.datafaker.Name;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,21 +27,14 @@ public final class FakerFactory {
      */
     public static List<FieldGenerator> buildFakerGenerators(Faker faker) {
         FakerStringSupplier fakerStringSupplier = new FakerStringSupplier(faker);
-        Map<String, AbstractProvider> fakerGroupProviders = Map.of(
-                "name", faker.name(),
-                "address", faker.address(),
-                "business", faker.business(),
-                "book", faker.book()
-        );
+        Map<String, AbstractProvider> fakerGroupProviders = FakerGroupProvider.getFakerGroupProviders(faker);
         List<FieldGenerator> fakerGenerators = new ArrayList<>();
         for (FakerType fakerType : FakerType.values()) {
-
             FieldGenerator fieldGenerator = Optional.ofNullable(fakerType.groupName)
                     .map(groupName -> fakerGroupProviders.get(groupName))
                     .map(abstractProvider -> getFieldGenerator(fakerStringSupplier, fakerType, abstractProvider))
                     .orElse(getDefaultFieldGenerator(faker, fakerStringSupplier, fakerType));
             fakerGenerators.add(fieldGenerator);
-
         }
         return fakerGenerators;
     }

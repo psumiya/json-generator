@@ -128,7 +128,15 @@ public enum FakerType {
      * a supplier to generate a value for the field key
      */
     protected final Function<Faker, String> supplier;
+
+    /**
+     * a group name for the field
+     */
     protected final String groupName;
+
+    /**
+     * the abstract provider for the group, such as Name, Address, etc.
+     */
     protected final Function<AbstractProvider, String> valueSupplier;
 
     /**
