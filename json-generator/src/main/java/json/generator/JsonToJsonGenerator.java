@@ -68,6 +68,9 @@ public record JsonToJsonGenerator(JsonGeneratorModel jsonGeneratorModel) impleme
     }
 
     private Localization getLocalizationSpec(JsonNode jsonNode) throws JsonProcessingException {
+        if (jsonNode.isEmpty()) {
+            return new Localization();
+        }
         return jsonGeneratorModel.objectMapper().readValue(jsonNode.toString(), Localization.class);
     }
 

@@ -1,0 +1,22 @@
+{
+  "___GENERATOR_SPEC": {
+    "___FIELDS": [
+      {
+        "fieldName": "primaryColor",
+        "generatorName": "ONE_OF",
+        "parameters": {
+          "values": [
+            "VIOLET",
+            "INDIGO",
+            "BLUE",
+            "GREEN",
+            "YELLOW",
+            "ORANGE",
+            "RED"
+          ]
+        }
+      }
+    ]
+  },
+  "primaryColor": "RED"
+}

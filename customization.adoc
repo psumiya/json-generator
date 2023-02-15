@@ -1,0 +1,76 @@
+= Custom Generators
+
+* IDENTITY
+
+The IDENTITY function behaves like the mathematical Identity function (see https://en.wikipedia.org/wiki/Identity_function).
+
+For any input x, the function returns the same value back as the generated value, i.e., `IDENTITY("someValue") = "someValue"`.
+
+[cols="1,1"]
+|===
+|Input |Output
+
+a|
+----
+{
+  "___GENERATOR_SPEC": {
+    "___FIELDS": [
+      {
+        "fieldName": "someStaticField",
+        "generatorName": "IDENTITY"
+      }
+    ]
+  },
+  "someStaticField": "someValue"
+}
+----
+
+a|
+----
+{
+  "someStaticField" : "someValue"
+}
+----
+
+* ONE_OF
+
+The IDENTITY function behaves like the mathematical Identity function (see https://en.wikipedia.org/wiki/Identity_function).
+
+For any input x, the function returns the same value back as the generated value, i.e., `IDENTITY("someValue") = "someValue"`.
+
+[cols="1,1"]
+|===
+|Input |Output
+
+a|
+----
+{
+  "___GENERATOR_SPEC": {
+    "___FIELDS": [
+      {
+        "fieldName": "primaryColor",
+        "generatorName": "ONE_OF",
+        "parameters": {
+          "values": [
+            "VIOLET",
+            "INDIGO",
+            "BLUE",
+            "GREEN",
+            "YELLOW",
+            "ORANGE",
+            "RED"
+          ]
+        }
+      }
+    ]
+  },
+  "primaryColor": "RED"
+}
+----
+
+a|
+----
+{
+  "primaryColor" : "ORANGE"
+}
+----

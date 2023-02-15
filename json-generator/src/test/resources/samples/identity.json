@@ -1,0 +1,11 @@
+{
+  "___GENERATOR_SPEC": {
+    "___FIELDS": [
+      {
+        "fieldName": "someStaticField",
+        "generatorName": "IDENTITY"
+      }
+    ]
+  },
+  "someStaticField": "someValue"
+}
