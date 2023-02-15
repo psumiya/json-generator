@@ -8,9 +8,246 @@ This is an experimental project to generate random Json strings based on a given
 
 The method generates a random Json based on the input provided. To see some examples, here are some randomly generated Json strings for corresponding inputs.
 
-include::examples.adoc[]
-
 The library takes an opinionated view of what things to randomize and how to go about it.
+
+== Examples
+
+[cols="1,1"]
+|===
+|Input |Output
+
+a|
+----
+{
+ "firstName": "alpha",
+ "lastName": "beta"
+}
+----
+
+a|
+----
+{
+  "firstName" : "Sylvester",
+  "lastName" : "Lakin"
+}
+----
+
+a|
+----
+{
+  "id": "0",
+  "username": "string",
+  "strings": [
+    "traveling",
+    "technology"
+  ],
+  "numbers": [1, 3],
+  "nestedObject": {
+    "param1": "Mahanaxar",
+    "param2": "Valinor"
+  },
+  "firstName": "blah",
+  "lastName": "blahh",
+  "gender": "Unknown",
+  "address": "123 St"
+}
+----
+
+a|
+----
+{
+  "id" : "gkXEDuX",
+  "username" : "tjkvR",
+  "strings" : [ "traveling", "technology", "", "P", "By", "nGHUKAdG" ],
+  "numbers" : [ 1, 3, 1873970129, 2146031070, 1655147238 ],
+  "nestedObject" : {
+    "param1" : "vuSNEWy",
+    "param2" : ""
+  },
+  "firstName" : "Fabian",
+  "lastName" : "Bechtelar",
+  "gender" : "NonBinary",
+  "address" : "47862 Morissette Drive, New Juttaville, MS 09109"
+}
+----
+|===
+
+=== Customization
+You may choose to provide a generator specification that informs the library regarding certain aspects of how to generate the Json.
+
+The generator specification is provided as its own node on the input to the library. This looks like an extra node in addition to the original sample to randomize, as the full input to the library.
+
+For an example, see the \___GENERATOR_SPEC node in the input below. The spec helps with overriding the default locale values, as defined in ___LOCALIZATION, and a way to plug in some excel-style formulas for generating specific nodes, as defined in ___FIELDS.
+
+[cols="1,1"]
+|===
+|Input |Output
+
+a|
+----
+{
+  "___GENERATOR_SPEC": {
+    "___LOCALIZATION": {
+      "language": "en",
+      "country": "US"
+    },
+    "___FIELDS": [
+      {
+        "fieldName": "someStaticField",
+        "generatorName": "IDENTITY"
+      },
+      {
+        "fieldName": "id",
+        "generatorName": "RANDOM_UUID"
+      },
+      {
+        "fieldName": "someOneOf",
+        "generatorName": "ONE_OF",
+        "parameters": {
+          "values": [
+            "B1",
+            "B2",
+            "AX"
+          ]
+        }
+      }
+    ]
+  },
+  "someStaticField": "static",
+  "id": "b66aef25-de3b-4761-8db2-b66793043aac",
+  "someOneOf": "B2",
+
+  "fullName": "ab",
+  "firstName": "a",
+  "lastName": "b",
+  "gender": "Unknown",
+
+  "address": "123 Bond St, Paris, FR",
+  "streetAddress": "123 Bond St",
+  "state": "AS",
+  "timeZone": "GMT",
+  "city": "Paris",
+
+  "creditCardType": "Visa",
+  "creditCardNumber": "1234567890123456",
+  "creditCardExpiry": "12/31/2022",
+
+  "title": "t",
+  "author": "",
+  "genre": "Finance",
+  "publisher": "RandomHouse",
+
+  "blend": "blend",
+
+  "color": "color",
+  "hexColor": "#12",
+
+  "bloodGroup": "A",
+
+  "currency": "USD",
+  "currencyName": "US Dollars"
+}
+----
+
+a|
+----
+{
+  "someStaticField": "static",
+  "id": "ab1fe802-7a0a-439e-b754-3ff290f91af9",
+  "someOneOf": "AX",
+  "fullName": "Silas Oberbrunner",
+  "firstName": "Pat",
+  "lastName": "Ondricka",
+  "gender": "Male",
+  "address": "8424 O'Connell Falls, North Chaya, LA 19058",
+  "streetAddress": "74398 Patrick Forest",
+  "state": "Washington",
+  "timeZone": "Asia/Kolkata",
+  "city": "New Erline",
+  "creditCardType": "maestro",
+  "creditCardNumber": "1234-2121-1221-1211",
+  "creditCardExpiry": "2013-9-12",
+  "title": "A Swiftly Tilting Planet",
+  "author": "Suzette Bailey",
+  "genre": "Narrative nonfiction",
+  "publisher": "Borgo Press",
+  "blend": "Goodbye Mug",
+  "color": "orange",
+  "hexColor": "#B7D87D",
+  "bloodGroup": "A-",
+  "currency": "LAK",
+  "currencyName": "Swedish Krona"
+}
+----
+
+a|
+----
+{
+  "___GENERATOR_SPEC": {
+    "___LOCALIZATION": {
+      "language": "es",
+      "country": "MX"
+    },
+    "___FIELDS": [
+      {
+        "fieldName": "someStaticField",
+        "generatorName": "IDENTITY"
+      },
+      {
+        "fieldName": "id",
+        "generatorName": "RANDOM_UUID"
+      },
+      {
+        "fieldName": "someOneOf",
+        "generatorName": "ONE_OF",
+        "parameters": {
+          "values": [
+            "B1",
+            "B2",
+            "AX"
+          ]
+        }
+      }
+    ]
+  },
+  "id": "b66aef25-de3b-4761-8db2-b66793043aac",
+  "username": "string",
+  "someStaticField": "static",
+  "strings": [
+    "traveling",
+    "technology"
+  ],
+  "numbers": [1, 3],
+  "nestedObject": {
+    "param1": "Mahanaxar",
+    "param2": "Valinor"
+  },
+  "firstName": "blah",
+  "lastName": "blahh",
+  "gender": "Unknown",
+  "someOneOf": "B2"
+}
+
+----
+a|
+----
+{
+  "id" : "bd08f64c-fbef-4776-8514-fc66fb19830f",
+  "username" : "PpUulr",
+  "someStaticField" : "static",
+  "strings" : [ "traveling", "technology", "Z", "mAUj" ],
+  "numbers" : [ 1, 3, 2089642448, 1658931818, 1158107405 ],
+  "nestedObject" : {
+    "param1" : "lqc",
+    "param2" : "R"
+  },
+  "firstName" : "Ismael",
+  "lastName" : "Durán",
+  "gender" : "Genderfluid",
+  "someOneOf" : "AX"
+}
+----
+|===
 
 == Usage
 
@@ -23,7 +260,7 @@ See the `JsonToJsonGeneratorTest` class for other canonical ways to invoke the r
 
 Run FullSpecTest to see randomized output for an input with all supported fields and spec.
 
-This project depends on the `net.datafaker:datafaker` library. That library generates fake json, similar to the javascript `faker.js` library or the python `faker` package.
+This project depends on the `net.datafaker:datafaker` library. That library generates fake data, similar to the javascript `faker.js` library or the python `faker` package.
 
 The default language supported for this library is `en`, and the default region is `US`.
 
