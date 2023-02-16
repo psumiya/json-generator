@@ -2,9 +2,9 @@
 
 * IDENTITY
 
-The IDENTITY function behaves like the mathematical Identity function (see https://en.wikipedia.org/wiki/Identity_function).
+The IDENTITY generator behaves like the mathematical Identity function (see https://en.wikipedia.org/wiki/Identity_function).
 
-For any input x, the function returns the same value back as the generated value, i.e., `IDENTITY("someValue") = "someValue"`.
+For any input x, the generator returns the same value back as the given input value, i.e., `IDENTITY("someValue") = "someValue"`.
 
 [cols="1,1"]
 |===
@@ -32,11 +32,13 @@ a|
 }
 ----
 
+|===
+
 * ONE_OF
 
-The IDENTITY function behaves like the mathematical Identity function (see https://en.wikipedia.org/wiki/Identity_function).
+The ONE_OF generator returns one of a possible set of values.
 
-For any input x, the function returns the same value back as the generated value, i.e., `IDENTITY("someValue") = "someValue"`.
+The item selected is decided based on the size of the array by pseudo-randomly generating an index between 0 and the total number of the possible set of values.
 
 [cols="1,1"]
 |===
@@ -74,3 +76,5 @@ a|
   "primaryColor" : "ORANGE"
 }
 ----
+
+|===
