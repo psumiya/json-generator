@@ -1,6 +1,10 @@
-= Custom Generators
+= Generators
 
-* IDENTITY
+== Custom Generators
+
+This section lists the custom generators provided by the library.
+
+=== IDENTITY
 
 The IDENTITY generator behaves like the mathematical Identity function (see https://en.wikipedia.org/wiki/Identity_function).
 
@@ -34,7 +38,7 @@ a|
 
 |===
 
-* ONE_OF
+=== ONE_OF
 
 The ONE_OF generator returns one of a possible set of values.
 
@@ -79,7 +83,7 @@ a|
 
 |===
 
-* RANDOM_UUID
+=== RANDOM_UUID
 
 The RANDOM_UUID generator returns a type 4 pseudo-randomly generated universally unique identifier (UUID).
 
@@ -110,3 +114,7 @@ a|
 ----
 
 |===
+
+== Faker Generators
+
+See link:json-generator/src/main/java/json/generator/faker/FakerType.java[FakerType] in this repository for supported Faker Types.
