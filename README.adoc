@@ -2,11 +2,11 @@
 :toc:
 
 == About Json Generator
-This is an experimental project to generate random Json strings based on a given input Json string.
+This is an experimental project to generate a pseudo-random Json string based on a given input Json string.
 
 `String generate(String input)`
 
-The method generates a random Json based on the input provided. To see some examples, here are some randomly generated Json strings for corresponding inputs.
+The method generates a pseudo random Json based on the input provided. To see some examples, here are some generated Json strings for corresponding inputs.
 
 The library takes an opinionated view of what things to randomize and how to go about it.
 
