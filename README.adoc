@@ -1,5 +1,6 @@
 = Json Generator
 :toc:
+:icons: font
 
 == About Json Generator
 This is an experimental project to generate a pseudo-random Json string based on a given input Json string.
