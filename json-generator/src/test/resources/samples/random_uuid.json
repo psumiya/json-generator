@@ -1,0 +1,11 @@
+{
+  "___GENERATOR_SPEC": {
+    "___FIELDS": [
+      {
+        "fieldName": "id",
+        "generatorName": "RANDOM_UUID"
+      }
+    ]
+  },
+  "id": "1"
+}

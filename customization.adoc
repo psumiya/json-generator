@@ -78,3 +78,35 @@ a|
 ----
 
 |===
+
+* RANDOM_UUID
+
+The RANDOM_UUID generator returns a type 4 pseudo-randomly generated universally unique identifier (UUID).
+
+[cols="1,1"]
+|===
+|Input |Output
+
+a|
+----
+{
+  "___GENERATOR_SPEC": {
+    "___FIELDS": [
+      {
+        "fieldName": "id",
+        "generatorName": "RANDOM_UUID"
+      }
+    ]
+  },
+  "id": "1"
+}
+----
+
+a|
+----
+{
+  "id" : "df4f4d24-a0b9-4488-ba61-44aad6599890"
+}
+----
+
+|===
