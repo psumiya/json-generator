@@ -2,10 +2,13 @@
   "___GENERATOR_SPEC": {
     "___FIELDS": [
       {
-        "fieldName": "id",
+        "fieldName": "generatedId",
         "generatorName": "RANDOM_UUID"
       }
     ]
   },
-  "id": "1"
+  "uuid": "should-generate-a-uuid-by-implicit-behavior",
+  "id": "should-generate-a-uuid-by-implicit-behavior",
+  "generatedId": "should-generate-a-uuid-due-to-above-spec",
+  "someOtherId": "should-generate-some-random-string"
 }

@@ -10,7 +10,7 @@
         "generatorName": "IDENTITY"
       },
       {
-        "fieldName": "id",
+        "fieldName": "generatedId",
         "generatorName": "RANDOM_UUID"
       },
       {
@@ -26,7 +26,7 @@
       }
     ]
   },
-  "id": "b66aef25-de3b-4761-8db2-b66793043aac",
+  "generatedId": "b66aef25-de3b-4761-8db2-b66793043aac",
   "username": "string",
   "someStaticField": "static",
   "strings": [

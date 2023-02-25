@@ -87,6 +87,8 @@ a|
 
 The RANDOM_UUID generator returns a type 4 pseudo-randomly generated universally unique identifier (UUID).
 
+This generator is automatically applied if your field name/key is `id` or `uuid`.
+
 [cols="1,1"]
 |===
 |Input |Output
@@ -97,7 +99,7 @@ a|
   "___GENERATOR_SPEC": {
     "___FIELDS": [
       {
-        "fieldName": "id",
+        "fieldName": "generatedId",
         "generatorName": "RANDOM_UUID"
       }
     ]
@@ -109,7 +111,7 @@ a|
 a|
 ----
 {
-  "id" : "df4f4d24-a0b9-4488-ba61-44aad6599890"
+  "generatedId" : "df4f4d24-a0b9-4488-ba61-44aad6599890"
 }
 ----
 

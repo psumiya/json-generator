@@ -57,7 +57,7 @@ a|
 a|
 ----
 {
-  "id" : "gkXEDuX",
+  "id" : "2587beeb-0d79-400c-a11b-e7df2bc45c0a",
   "username" : "tjkvR",
   "strings" : [ "traveling", "technology", "", "P", "By", "nGHUKAdG" ],
   "numbers" : [ 1, 3, 1873970129, 2146031070, 1655147238 ],
@@ -117,7 +117,7 @@ a|
         "generatorName": "IDENTITY"
       },
       {
-        "fieldName": "id",
+        "fieldName": "generatedId",
         "generatorName": "RANDOM_UUID"
       },
       {
@@ -134,7 +134,9 @@ a|
     ]
   },
   "someStaticField": "static",
+  "uuid": "72ebd5b3-6109-443c-8cb3-6e3a96e7fb86",
   "id": "b66aef25-de3b-4761-8db2-b66793043aac",
+  "generatedId": "2587beeb-0d79-400c-a11b-e7df2bc45c0a",
   "someOneOf": "B2",
 
   "fullName": "ab",
@@ -172,31 +174,33 @@ a|
 a|
 ----
 {
-  "someStaticField": "static",
-  "id": "ab1fe802-7a0a-439e-b754-3ff290f91af9",
-  "someOneOf": "AX",
-  "fullName": "Silas Oberbrunner",
-  "firstName": "Pat",
-  "lastName": "Ondricka",
-  "gender": "Male",
-  "address": "8424 O'Connell Falls, North Chaya, LA 19058",
-  "streetAddress": "74398 Patrick Forest",
-  "state": "Washington",
-  "timeZone": "Asia/Kolkata",
-  "city": "New Erline",
-  "creditCardType": "maestro",
-  "creditCardNumber": "1234-2121-1221-1211",
-  "creditCardExpiry": "2013-9-12",
-  "title": "A Swiftly Tilting Planet",
-  "author": "Suzette Bailey",
-  "genre": "Narrative nonfiction",
-  "publisher": "Borgo Press",
-  "blend": "Goodbye Mug",
-  "color": "orange",
-  "hexColor": "#B7D87D",
-  "bloodGroup": "A-",
-  "currency": "LAK",
-  "currencyName": "Swedish Krona"
+  "someStaticField" : "static",
+  "uuid" : "f08569ed-8cab-442f-9f72-d656bac14a25",
+  "id" : "896e192f-99ec-4e39-816d-1ad3808b570e",
+  "generatedId" : "b658f7cb-6e88-4046-b14b-aaed27b29d15",
+  "someOneOf" : "B2",
+  "fullName" : "Miss Carrol Jenkins",
+  "firstName" : "Margret",
+  "lastName" : "Dickens",
+  "gender" : "Genderfluid",
+  "address" : "8581 Leannon Points, North Oliver, AR 82615",
+  "streetAddress" : "4108 Bo Radial",
+  "state" : "Massachusetts",
+  "timeZone" : "Europe/Madrid",
+  "city" : "Katharineborough",
+  "creditCardType" : "discover",
+  "creditCardNumber" : "1211-1221-1234-2201",
+  "creditCardExpiry" : "2013-9-12",
+  "title" : "Look Homeward, Angel",
+  "author" : "Donte Kirlin",
+  "genre" : "Classic",
+  "publisher" : "Hackett Publishing Company",
+  "blend" : "Jacked Been",
+  "color" : "magenta",
+  "hexColor" : "#D00E8D",
+  "bloodGroup" : "AB-",
+  "currency" : "XTS",
+  "currencyName" : "Dalasi"
 }
 ----
 
@@ -277,7 +281,7 @@ To evaluate performance, a performance benchmark is provided in the `src/jmh` di
 
 To execute the benchmark, run `./gradlew jmh` at the root of this project.
 
-Here is the result of a jmh benchmark execution:
+Here is the result of a sample jmh benchmark execution:
 
 [source:shell]
 ----

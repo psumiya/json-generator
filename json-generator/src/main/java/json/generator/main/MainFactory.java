@@ -21,6 +21,18 @@ public final class MainFactory {
         return List.of(
                 new IdentityGenerator(),
                 new OneOfGenerator(),
+                new RandomUUIDGenerator() {
+                    @Override
+                    public String getFieldName() {
+                        return "id";
+                    }
+                },
+                new RandomUUIDGenerator() {
+                    @Override
+                    public String getFieldName() {
+                        return "uuid";
+                    }
+                },
                 new RandomUUIDGenerator()
         );
     }
