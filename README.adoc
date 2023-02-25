@@ -273,7 +273,7 @@ a|
 ----
 |===
 
-Read about generators here:
+Read about generators here: link:Generators.adoc[]
 
 == Performance
 
