@@ -75,7 +75,31 @@ a|
 
 == Usage
 
+=== Build
+
+Add the following dependency.
+
+* Gradle
 ----
+implementation 'json-generator:json-generator:0.0.2'
+----
+
+* Maven
+
+----
+<dependency>
+  <groupId>json-generator</groupId>
+  <artifactId>json-generator</artifactId>
+  <version>0.0.2</version>
+</dependency>
+----
+
+=== Code
+
+----
+import json.generator.api.Generator;
+import json.generator.api.GeneratorFactory;
+
 Generator<String, String> generator = GeneratorFactory.getDefaultGenerator();
 String generated = generator.generate(inputJson);
 ----
@@ -92,7 +116,11 @@ This library can be used in situations where you may want to randomize the data 
 
 NOTE: While the library tries to generate pseudo random data, it is possible it can generate some data that is not fake. Exercise caution around its usage.
 
-=== Customization
+=== Example
+
+Here is a github repository showing a project that uses this library: link:https://github.com/psumiya/json-generator-demo[]
+
+== Customization
 You may choose to provide a generator specification that informs the library regarding certain aspects of how to generate the Json.
 
 The generator specification is provided as its own node on the input to the library. This looks like an extra node in addition to the original sample to randomize, as the full input to the library.
