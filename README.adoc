@@ -81,7 +81,7 @@ Add the following dependency.
 
 * Gradle
 ----
-implementation 'json-generator:json-generator:0.0.2'
+implementation 'json-generator:json-generator:0.0.3'
 ----
 
 * Maven
@@ -90,7 +90,7 @@ implementation 'json-generator:json-generator:0.0.2'
 <dependency>
   <groupId>json-generator</groupId>
   <artifactId>json-generator</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
 </dependency>
 ----
 

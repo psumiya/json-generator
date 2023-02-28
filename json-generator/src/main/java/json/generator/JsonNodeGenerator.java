@@ -78,12 +78,12 @@ public record JsonNodeGenerator(JsonGeneratorModel jsonGeneratorModel) implement
                     throw new IllegalArgumentException("Empty array provided as input. Cannot use empty array to deduce array items.");
                 }
                 JsonNode sample = jsonNode.get(random.nextInt(size));
-                int newSize = random.nextInt(jsonGeneratorModel.maxRandomArraySize());
+                int newSize = random.nextInt(1, jsonGeneratorModel.maxRandomArraySize());
                 List<JsonNode> nodeList = new ArrayList<>(newSize);
                 for (int i = 0; i < newSize; i++) {
                     nodeList.add(randomize(sample.deepCopy(), input, random, fieldConfigurationMap, fieldGeneratorMap));
                 }
-                ((ArrayNode) jsonNode).addAll(nodeList);
+                return new ArrayNode(JSON_NODE_FACTORY, nodeList);
             }
         }
         return jsonNode;

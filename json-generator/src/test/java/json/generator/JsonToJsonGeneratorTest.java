@@ -25,6 +25,8 @@ public class JsonToJsonGeneratorTest {
 
     private static final String GENERATOR_SPEC_NODE_NAME = "___GENERATOR_SPEC";
 
+    private static final ObjectMapper MAPPER_WITH_PRETTY_PRINT = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+
     static Stream<Arguments> sampleTypeProvider() {
         return Stream.of(
                 arguments("firstName", """
@@ -41,7 +43,7 @@ public class JsonToJsonGeneratorTest {
     }
 
     static Stream<Arguments> sampleFilesProvider() {
-        JsonGeneratorModel jsonGeneratorModel = new JsonGeneratorModel(new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT));
+        JsonGeneratorModel jsonGeneratorModel = new JsonGeneratorModel(MAPPER_WITH_PRETTY_PRINT);
         return Stream.of(
                 arguments(DEFAULT_ROOT + "firstLastName.json", jsonGeneratorModel),
                 arguments(DEFAULT_ROOT + "root_is_object.json", new JsonGeneratorModel()),
@@ -81,7 +83,7 @@ public class JsonToJsonGeneratorTest {
             try {
                 JsonNode randomized = jsonGeneratorModel.objectMapper().readTree(generated);
                 assertEquals(0, jsonKeyComparator.compare(original, randomized));
-                System.out.println(jsonGeneratorModel.objectMapper().writeValueAsString(randomized));
+                System.out.println(MAPPER_WITH_PRETTY_PRINT.writeValueAsString(randomized));
             } catch (JsonProcessingException e) {
                 fail("JsonProcessingException occurred." + e);
             }
