@@ -71,6 +71,59 @@ a|
   "address" : "47862 Morissette Drive, New Juttaville, MS 09109"
 }
 ----
+
+a|
+----
+[
+	{
+		"genre": "reference",
+		"author": "Nigel Rees",
+		"title": "Sayings of the Century",
+		"price": 8.95
+	}
+]
+
+a|
+----
+[
+	{
+		"genre": "Fantasy",
+		"author": "Miss Wesley Hammes",
+		"title": "Ah, Wilderness!",
+		"price": 177996346
+	},
+	{
+		"genre": "Metafiction",
+		"author": "Gigi West",
+		"title": "The Golden Apples of the Sun",
+		"price": 2139671705
+	},
+	{
+		"genre": "Tall tale",
+		"author": "Enid Johnson",
+		"title": "Waiting for the Barbarians",
+		"price": 1351133435
+	},
+	{
+		"genre": "Tall tale",
+		"author": "Werner Ruecker",
+		"title": "Butter In a Lordly Dish",
+		"price": 1014620715
+	},
+	{
+		"genre": "Fiction narrative",
+		"author": "Mrs. Rueben Cole",
+		"title": "Fame Is the Spur",
+		"price": 434184399
+	},
+	{
+		"genre": "Biography/Autobiography",
+		"author": "Ms. Don Pouros",
+		"title": "Ego Dominus Tuus",
+		"price": 19385680
+	}
+]
+
 |===
 
 == Usage
